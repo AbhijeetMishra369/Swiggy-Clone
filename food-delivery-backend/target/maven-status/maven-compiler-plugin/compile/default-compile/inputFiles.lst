@@ -34,6 +34,7 @@
 /workspace/food-delivery-backend/src/main/java/com/foodapp/repository/RestaurantRepository.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/security/JwtAuthFilter.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/security/JwtUtil.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/security/TokenBlacklistService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/AuthService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/CartService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/MenuService.java
