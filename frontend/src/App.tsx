@@ -14,6 +14,8 @@ import Checkout from './pages/Checkout';
 import OrderTracking from './pages/OrderTracking';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminRestaurants from './pages/admin/Restaurants';
+import AdminOrders from './pages/admin/Orders';
 
 const queryClient = new QueryClient();
 
@@ -63,8 +65,8 @@ function App() {
           {/* Admin protected examples */}
           <Route element={<ProtectedRoute role="ADMIN" />}> 
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/restaurants" element={<div>Manage Restaurants</div>} />
-            <Route path="/admin/orders" element={<div>Manage Orders</div>} />
+            <Route path="/admin/restaurants" element={<AdminRestaurants />} />
+            <Route path="/admin/orders" element={<AdminOrders />} />
           </Route>
         </Routes>
         <Footer />

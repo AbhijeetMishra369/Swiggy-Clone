@@ -16,14 +16,17 @@ export default function AdminDashboard() {
       <aside className="col-span-12 md:col-span-3 lg:col-span-2 border-r bg-white">
         <div className="p-4 font-semibold text-brand-600">Foodly Admin</div>
         <nav className="p-2 space-y-1 text-sm">
-          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Dashboard</a>
-          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Restaurants</a>
-          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Orders</a>
+          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin">Dashboard</a>
+          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/restaurants">Restaurants</a>
+          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/orders">Orders</a>
           <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Coupons</a>
           <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Users</a>
         </nav>
       </aside>
       <main className="col-span-12 md:col-span-9 lg:col-span-10 p-4">
+        <div className="flex items-center justify-end mb-4">
+          <div className="text-sm text-gray-600">Admin</div>
+        </div>
         <h1 className="text-2xl font-semibold mb-4">Dashboard</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="rounded-xl border bg-white p-4 shadow-sm">
