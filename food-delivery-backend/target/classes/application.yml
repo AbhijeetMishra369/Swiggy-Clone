@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: food-delivery
+  datasource:
+    url: jdbc:mysql://localhost:3306/foodapp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+security:
+  jwt:
+    # base64 of a 256-bit key; replace in prod
+    secret: Zm9vZC1kZWxpdmVyeS1hcHAtc2VjcmV0LXNwcmluZ2Jvb3Qtc2lnbg==
+    expMinutes: 240
+
