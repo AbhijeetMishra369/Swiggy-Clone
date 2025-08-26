@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import RestaurantCard from '../components/RestaurantCard';
 import type { Restaurant } from '../types';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Home() {
+  const [params] = useSearchParams();
   const [query, setQuery] = useState('');
+  useEffect(() => { setQuery(params.get('q') || ''); }, [params]);
   const [cuisine, setCuisine] = useState('');
   const { data } = useQuery({
     queryKey: ['restaurants', query, cuisine],
@@ -35,7 +38,7 @@ export default function Home() {
           <div />
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
         {data?.map(r => (
           <RestaurantCard key={r.id} r={r} />
         ))}
