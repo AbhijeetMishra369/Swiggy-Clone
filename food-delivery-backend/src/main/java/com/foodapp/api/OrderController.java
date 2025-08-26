@@ -6,6 +6,7 @@ import com.foodapp.domain.Order;
 import com.foodapp.dto.PlaceOrderRequest;
 import com.foodapp.repository.AppUserRepository;
 import com.foodapp.repository.CartRepository;
+import com.foodapp.repository.OrderRepository;
 import com.foodapp.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class OrderController {
     private final OrderService orderService;
     private final AppUserRepository appUserRepository;
     private final CartRepository cartRepository;
+    private final OrderRepository orderRepository;
 
     private AppUser currentUser(Authentication auth) {
         return appUserRepository.findByEmail(auth.getName()).orElseThrow();
@@ -37,5 +39,11 @@ public class OrderController {
     @GetMapping("/{id}/track")
     public ResponseEntity<Order> track(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.track(id));
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<?> history(Authentication auth) {
+        AppUser user = currentUser(auth);
+        return ResponseEntity.ok(orderRepository.findByUserOrderByCreatedAtDesc(user));
     }
 }
