@@ -1,10 +1,7 @@
 package com.foodapp.bootstrap;
 
-import com.foodapp.domain.Address;
-import com.foodapp.domain.MenuItem;
-import com.foodapp.domain.Restaurant;
-import com.foodapp.repository.MenuItemRepository;
-import com.foodapp.repository.RestaurantRepository;
+import com.foodapp.domain.*;
+import com.foodapp.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -19,9 +16,22 @@ public class DataLoader implements CommandLineRunner {
 
     private final RestaurantRepository restaurantRepository;
     private final MenuItemRepository menuItemRepository;
+    private final AppUserRepository appUserRepository;
 
     @Override
     public void run(String... args) {
+        // seed admin
+        if (appUserRepository.findByEmail("admin@food.com").isEmpty()) {
+            AppUser admin = AppUser.builder()
+                    .email("admin@food.com")
+                    .fullName("Admin User")
+                    .passwordHash(new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("Admin123!"))
+                    .roles(java.util.Set.of("ADMIN"))
+                    .blocked(false)
+                    .build();
+            appUserRepository.save(admin);
+        }
+
         if (restaurantRepository.count() > 0) {
             return;
         }
