@@ -11,8 +11,13 @@ public class PaymentController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Map<String, Object> payload) {
-        // TODO: integrate Razorpay SDK to create order in test mode
-        return ResponseEntity.ok(Map.of("providerOrderId", "razorpay_test_order_123"));
+        // expected: { orderId: number, amount: paise }
+        // TODO: integrate Razorpay SDK to create order in test mode using 'amount'
+        return ResponseEntity.ok(Map.of(
+                "providerOrderId", "razorpay_test_order_123",
+                "orderId", payload.get("orderId"),
+                "amount", payload.get("amount")
+        ));
     }
 
     @PostMapping("/status")
