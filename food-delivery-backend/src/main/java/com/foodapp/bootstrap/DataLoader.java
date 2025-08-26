@@ -24,9 +24,11 @@ public class DataLoader implements CommandLineRunner {
         if (appUserRepository.findByEmail("admin@food.com").isEmpty()) {
             AppUser admin = AppUser.builder()
                     .email("admin@food.com")
-                    .fullName("Admin User")
-                    .passwordHash(new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("Admin123!"))
-                    .roles(java.util.Set.of("ADMIN"))
+                    .name("Admin User")
+                    .password(new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("Admin123!"))
+                    .role(Role.ADMIN)
+                    .phone("+1-555-0000")
+                    .address("HQ")
                     .blocked(false)
                     .build();
             appUserRepository.save(admin);
