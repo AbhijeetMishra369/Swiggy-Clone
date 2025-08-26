@@ -9,6 +9,11 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import RestaurantDetails from './pages/RestaurantDetails';
+import CartPage from './pages/Cart';
+import Checkout from './pages/Checkout';
+import OrderTracking from './pages/OrderTracking';
+import Profile from './pages/Profile';
+import AdminDashboard from './pages/AdminDashboard';
 
 const queryClient = new QueryClient();
 
@@ -49,14 +54,15 @@ function App() {
 
           {/* Customer protected examples */}
           <Route element={<ProtectedRoute role="CUSTOMER" />}> 
-            <Route path="/cart" element={<div>Cart</div>} />
-            <Route path="/orders" element={<div>Orders</div>} />
-            <Route path="/profile" element={<div>Profile</div>} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/orders/:id/track" element={<OrderTracking />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           {/* Admin protected examples */}
           <Route element={<ProtectedRoute role="ADMIN" />}> 
-            <Route path="/admin" element={<div>Admin Dashboard</div>} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/restaurants" element={<div>Manage Restaurants</div>} />
             <Route path="/admin/orders" element={<div>Manage Orders</div>} />
           </Route>
