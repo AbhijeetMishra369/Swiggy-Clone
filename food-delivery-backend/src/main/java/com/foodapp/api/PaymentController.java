@@ -25,4 +25,10 @@ public class PaymentController {
         // TODO: verify signature and payment status
         return ResponseEntity.ok(Map.of("status", "success"));
     }
+
+    @PostMapping("/verify")
+    public ResponseEntity<?> verify(@RequestBody Map<String, Object> payload) {
+        // TODO: verify Razorpay signature (stub). Expect: razorpay_order_id, razorpay_payment_id, razorpay_signature
+        return ResponseEntity.ok(Map.of("verified", true));
+    }
 }

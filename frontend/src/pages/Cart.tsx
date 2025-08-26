@@ -14,8 +14,9 @@ export default function CartPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className="md:col-span-2 space-y-3">
           {items.map(i => (
-            <div key={i.id} className="flex items-center justify-between border rounded-xl p-4 bg-white shadow-sm">
-              <div>
+            <div key={i.id} className="flex items-center justify-between border rounded-xl p-4 bg-white shadow-sm gap-4">
+              <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0" />
+              <div className="flex-1">
                 <h3 className="font-medium">{i.name}</h3>
                 <p className="text-sm text-gray-600">₹ {i.price}</p>
               </div>

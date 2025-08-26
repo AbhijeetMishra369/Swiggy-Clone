@@ -33,7 +33,7 @@ export default function Checkout() {
         description: 'Order payment',
         order_id: providerOrderId,
         handler: async (response: any) => {
-          await api.post('/api/payment/status', response);
+          await api.post('/api/payment/verify', response);
           navigate(`/orders/${orderId}/track`);
         },
         prefill: {},

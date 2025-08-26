@@ -35,9 +35,20 @@ public class CartController {
         return ResponseEntity.ok(cartService.view(currentUser(auth)));
     }
 
+    @GetMapping
+    public ResponseEntity<Cart> viewAlias(Authentication auth) {
+        return ResponseEntity.ok(cartService.view(currentUser(auth)));
+    }
+
     @PostMapping("/remove")
     public ResponseEntity<?> remove(@Valid @RequestBody RemoveFromCartRequest req, Authentication auth) {
         cartService.removeItem(currentUser(auth), req.getCartItemId());
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/remove/{itemId}")
+    public ResponseEntity<?> removePath(@PathVariable Long itemId, Authentication auth) {
+        cartService.removeItem(currentUser(auth), itemId);
         return ResponseEntity.ok().build();
     }
 }
