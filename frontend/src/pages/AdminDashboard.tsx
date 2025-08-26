@@ -19,8 +19,8 @@ export default function AdminDashboard() {
           <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin">Dashboard</a>
           <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/restaurants">Restaurants</a>
           <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/orders">Orders</a>
-          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Coupons</a>
-          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="#">Users</a>
+          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/coupons">Coupons</a>
+          <a className="block px-4 py-2 rounded-md hover:bg-gray-50" href="/admin/users">Users</a>
         </nav>
       </aside>
       <main className="col-span-12 md:col-span-9 lg:col-span-10 p-4">

@@ -16,6 +16,8 @@ import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminRestaurants from './pages/admin/Restaurants';
 import AdminOrders from './pages/admin/Orders';
+import AdminCoupons from './pages/admin/Coupons';
+import AdminUsers from './pages/admin/Users';
 
 const queryClient = new QueryClient();
 
@@ -67,6 +69,8 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/restaurants" element={<AdminRestaurants />} />
             <Route path="/admin/orders" element={<AdminOrders />} />
+            <Route path="/admin/coupons" element={<AdminCoupons />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
           </Route>
         </Routes>
         <Footer />
