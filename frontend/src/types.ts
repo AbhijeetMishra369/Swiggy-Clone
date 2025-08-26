@@ -6,6 +6,8 @@ export type Restaurant = {
   phone?: string;
   averageRating?: number;
   address?: Address;
+  imageUrl?: string;
+  location?: string;
 };
 
 export type MenuItem = {
@@ -15,4 +17,5 @@ export type MenuItem = {
   price: number;
   category: string;
   available?: boolean;
+  imageUrl?: string;
 };

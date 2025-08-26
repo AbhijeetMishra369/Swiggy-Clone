@@ -35,5 +35,7 @@ public class MenuItem {
     private String category; // starters, main course, beverages, etc.
 
     private Boolean available;
+
+    private String imageUrl;
 }
 

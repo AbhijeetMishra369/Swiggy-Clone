@@ -2,9 +2,11 @@ package com.foodapp.api;
 
 import com.foodapp.domain.Coupon;
 import com.foodapp.domain.Restaurant;
+import com.foodapp.domain.MenuItem;
 import com.foodapp.repository.CouponRepository;
 import com.foodapp.repository.OrderRepository;
 import com.foodapp.repository.RestaurantRepository;
+import com.foodapp.repository.MenuItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import java.util.List;
 public class AdminController {
 
     private final RestaurantRepository restaurantRepository;
+    private final MenuItemRepository menuItemRepository;
     private final OrderRepository orderRepository;
     private final CouponRepository couponRepository;
 
@@ -27,6 +30,12 @@ public class AdminController {
     public List<Restaurant> listRestaurants() { return restaurantRepository.findAll(); }
     @PostMapping("/restaurants")
     public Restaurant createRestaurant(@RequestBody Restaurant r) { return restaurantRepository.save(r); }
+    @PostMapping("/restaurants/{id}/menu")
+    public MenuItem createMenuItem(@PathVariable Long id, @RequestBody MenuItem m) {
+        Restaurant r = restaurantRepository.findById(id).orElseThrow();
+        m.setRestaurant(r);
+        return menuItemRepository.save(m);
+    }
     @DeleteMapping("/restaurants/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable Long id) { restaurantRepository.deleteById(id); return ResponseEntity.ok().build(); }
 

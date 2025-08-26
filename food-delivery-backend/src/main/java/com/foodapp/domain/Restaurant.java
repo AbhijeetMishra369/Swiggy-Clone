@@ -29,6 +29,10 @@ public class Restaurant {
 
     private BigDecimal averageRating;
 
+    private String imageUrl;
+
+    private String location;
+
     @Embedded
     private Address address;
 
