@@ -19,3 +19,15 @@ export function setAuthToken(token?: string) {
 // Initialize from saved token
 const saved = localStorage.getItem('token');
 if (saved) setAuthToken(saved);
+
+// Response interceptor to catch 401s (optional navigation will be done by caller)
+api.interceptors.response.use(
+  (res) => res,
+  (error) => {
+    if (error?.response?.status === 401) {
+      // token invalid/expired
+      // you can dispatch logout from a central place if needed
+    }
+    return Promise.reject(error);
+  }
+);
