@@ -1,10 +1,14 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { api } from './lib/api';
 import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import RestaurantDetails from './pages/RestaurantDetails';
 
 const queryClient = new QueryClient();
 
@@ -31,24 +35,17 @@ function RestaurantsPage() {
   );
 }
 
-function Home() {
-  return (
-    <div className="container">
-      <h1>Food Delivery</h1>
-      <p><Link to="/restaurants">Browse Restaurants</Link></p>
-    </div>
-  );
-}
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/restaurants" element={<RestaurantsPage />} />
+          <Route path="/restaurants/:id" element={<RestaurantDetails />} />
 
           {/* Customer protected examples */}
           <Route element={<ProtectedRoute role="CUSTOMER" />}> 
@@ -64,6 +61,7 @@ function App() {
             <Route path="/admin/orders" element={<div>Manage Orders</div>} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter>
     </QueryClientProvider>
   );
