@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { api } from './lib/api';
 import './App.css';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const queryClient = new QueryClient();
 
@@ -42,8 +45,24 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/restaurants" element={<RestaurantsPage />} />
+
+          {/* Customer protected examples */}
+          <Route element={<ProtectedRoute role="CUSTOMER" />}> 
+            <Route path="/cart" element={<div>Cart</div>} />
+            <Route path="/orders" element={<div>Orders</div>} />
+            <Route path="/profile" element={<div>Profile</div>} />
+          </Route>
+
+          {/* Admin protected examples */}
+          <Route element={<ProtectedRoute role="ADMIN" />}> 
+            <Route path="/admin" element={<div>Admin Dashboard</div>} />
+            <Route path="/admin/restaurants" element={<div>Manage Restaurants</div>} />
+            <Route path="/admin/orders" element={<div>Manage Orders</div>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
