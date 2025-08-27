@@ -33,9 +33,9 @@ export default function Register() {
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-gray-100 bg-white dark:bg-gray-900 shadow-sm overflow-hidden">
           <div className="px-6 pt-6 text-center">
-            <img src="/logo.svg" alt="Foodly" width={36} height={36} className="mx-auto h-9 w-9" loading="eager" decoding="sync" />
+            <img src="/logo.svg" alt="Foodly" width={128} height={32} className="mx-auto h-8 w-32" loading="eager" decoding="sync" />
             <h2 className="mt-2 text-xl font-semibold text-gray-900 dark:text-white">Create your account</h2>
-            <p className="text-sm text-gray-500">Join Foodly in seconds</p>
+            <p className="text-sm text-gray-500">Discover restaurants near you and save with offers</p>
           </div>
           <div className="p-6">
             {error && <div className="mb-3 rounded-md bg-red-50 text-red-700 text-sm px-3 py-2 border border-red-100">{error}</div>}

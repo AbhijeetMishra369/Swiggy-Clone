@@ -19,8 +19,8 @@ export default function Navbar() {
       <div className="container py-2 grid grid-cols-12 gap-3 items-center">
         <div className="col-span-4 sm:col-span-3">
           <Link to="/" className="inline-flex items-center gap-2">
-            <img src="/logo.svg" alt="Foodly" width={28} height={28} className="h-7 w-7" loading="eager" decoding="sync" />
-            <span className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight">Foodly</span>
+            <img src="/logo.svg" alt="Foodly" width={112} height={28} className="h-7 w-[112px]" loading="eager" decoding="sync" />
+            <span className="sr-only">Foodly</span>
           </Link>
         </div>
         <div className="col-span-8 sm:col-span-6">
@@ -61,8 +61,8 @@ export default function Navbar() {
           {!user && (
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <Link to="/login" className="px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Login</Link>
-              <Link to="/register" className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700">Sign up</Link>
+              <Link to="/login" className="px-3 py-1.5 rounded-md border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">Log in</Link>
+              <Link to="/register" className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow-sm">Sign up</Link>
             </div>
           )}
           {user && (
