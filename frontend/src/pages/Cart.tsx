@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../store';
 import { updateQuantity, removeFromCart } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import SmartImage from '../components/SmartImage';
 
 export default function CartPage() {
   const items = useAppSelector(s => s.cart.items);
@@ -16,7 +17,7 @@ export default function CartPage() {
           {items.map(i => (
             <div key={i.id} className="flex items-center justify-between border rounded-xl p-4 bg-white shadow-sm gap-4">
               <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
-                <img src={`https://source.unsplash.com/200x200/?food&sig=${i.id}`} alt={i.name} className="w-full h-full object-cover" />
+                <SmartImage src={`https://source.unsplash.com/200x200/?food&sig=${i.id}`} alt={i.name} />
               </div>
               <div className="flex-1">
                 <h3 className="font-medium">{i.name}</h3>

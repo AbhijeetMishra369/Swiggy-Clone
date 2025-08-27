@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/auth")
@@ -81,5 +82,35 @@ public class AuthController {
             } catch (Exception ignored) {}
         }
         return ResponseEntity.ok(Map.of("message", "logged out"));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> me(Authentication auth) {
+        AppUser user = appUserRepository.findByEmail(auth.getName()).orElseThrow();
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "email", user.getEmail(),
+                "name", user.getName(),
+                "role", user.getRole().name(),
+                "phone", user.getPhone(),
+                "address", user.getAddress()
+        ));
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<?> updateMe(Authentication auth, @RequestBody Map<String, String> body) {
+        AppUser user = appUserRepository.findByEmail(auth.getName()).orElseThrow();
+        if (body.containsKey("name")) user.setName(body.get("name"));
+        if (body.containsKey("phone")) user.setPhone(body.get("phone"));
+        if (body.containsKey("address")) user.setAddress(body.get("address"));
+        appUserRepository.save(user);
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "email", user.getEmail(),
+                "name", user.getName(),
+                "role", user.getRole().name(),
+                "phone", user.getPhone(),
+                "address", user.getAddress()
+        ));
     }
 }

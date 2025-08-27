@@ -2,22 +2,67 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import { motion } from 'framer-motion';
+import 'leaflet/dist/leaflet.css';
+import { useEffect, useState } from 'react';
+import { addToast } from '../store/toastSlice';
+import { useAppDispatch } from '../store';
 
 const steps = ['Pending', 'Preparing', 'OutForDelivery', 'Delivered'];
 
 export default function OrderTracking() {
   const { id } = useParams();
   const orderId = Number(id);
+  const [liveStatus, setLiveStatus] = useState<string | null>(null);
+  const [driver, setDriver] = useState<{ lat: number; lng: number } | null>(null);
+  const dispatch = useAppDispatch();
+  const [eta, setEta] = useState<number>(30 * 60); // 30 minutes in seconds
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
     queryFn: async () => (await api.get(`/api/orders/${orderId}/track`)).data,
+    refetchInterval: 30000,
+    refetchOnWindowFocus: true,
     enabled: !!orderId,
   });
-  const idx = steps.findIndex(s => s === order?.status);
+  const currentStatus = liveStatus || order?.status;
+  const idx = steps.findIndex(s => s === currentStatus);
+
+  useEffect(() => {
+    if (!orderId) return;
+    const timer = setInterval(() => setEta((e) => Math.max(0, e - 1)), 1000);
+    const ev = new EventSource(`${api.defaults.baseURL}/api/orders/${orderId}/events`);
+    ev.addEventListener('status', (e: MessageEvent) => {
+      setLiveStatus(String(e.data));
+      if (Notification?.permission === 'granted') {
+        new Notification('Order update', { body: String(e.data) });
+      } else if (Notification && Notification.permission !== 'denied') {
+        Notification.requestPermission();
+      }
+      if (String(e.data) === 'Delivered') {
+        dispatch(addToast({ message: 'Order delivered 🎉', type: 'success' }));
+      }
+    });
+    ev.addEventListener('location', (e: MessageEvent) => {
+      const [lat, lng] = String(e.data).split(',').map(Number);
+      setDriver({ lat, lng });
+    });
+    ev.onerror = () => {
+      ev.close();
+    };
+    return () => { ev.close(); clearInterval(timer); };
+  }, [orderId]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
-      <h1 className="text-2xl font-semibold mb-4">Order Tracking</h1>
+      <h1 className="text-2xl font-semibold mb-2">Order Tracking</h1>
+      <div className={`mb-3 px-3 py-2 rounded-md border ${currentStatus === 'OutForDelivery' ? 'bg-amber-50 text-amber-800 border-amber-100' : currentStatus === 'Delivered' ? 'bg-green-50 text-green-800 border-green-100' : 'bg-gray-50 text-gray-700 border-gray-100'}`}>
+        {currentStatus === 'OutForDelivery' && 'Your order is on the way!'}
+        {currentStatus === 'Preparing' && 'Restaurant is preparing your order'}
+        {currentStatus === 'Pending' && 'Order placed. Waiting for confirmation'}
+        {currentStatus === 'Delivered' && 'Delivered! Enjoy your meal'}
+      </div>
+      <div className="mb-4 h-60 rounded-xl border overflow-hidden relative">
+        <iframe title="map" className="absolute inset-0 w-full h-full" src={`https://maps.google.com/maps?q=${driver?.lat ?? 28.6139},${driver?.lng ?? 77.2090}&z=13&output=embed`} />
+      </div>
       <div className="flex items-center justify-between">
         {steps.map((s, i) => (
           <div key={s} className="flex-1 flex flex-col items-center">
@@ -36,6 +81,15 @@ export default function OrderTracking() {
             <span className="text-xs mt-2">{s}</span>
           </div>
         ))}
+      </div>
+      <div className="mt-6">
+        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-full bg-brand-600 transition-all" style={{ width: `${((idx + 1) / steps.length) * 100}%` }} />
+        </div>
+        <div className="mt-2 text-sm text-gray-600 flex items-center justify-between">
+          <span>Status: {currentStatus ?? 'Loading...'}</span>
+          <span>ETA: {Math.floor(eta/60)}m {eta%60}s</span>
+        </div>
       </div>
     </div>
   );

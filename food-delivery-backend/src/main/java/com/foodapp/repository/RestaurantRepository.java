@@ -15,5 +15,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     @Query("select r from Restaurant r order by r.averageRating desc")
     List<Restaurant> findTopRated();
+
+    @Query("select r from Restaurant r where lower(r.name) like lower(concat('%', ?1, '%'))")
+    List<Restaurant> searchByName(String q);
 }
 

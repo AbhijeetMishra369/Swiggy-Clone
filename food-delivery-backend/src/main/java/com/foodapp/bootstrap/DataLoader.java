@@ -17,6 +17,8 @@ public class DataLoader implements CommandLineRunner {
     private final RestaurantRepository restaurantRepository;
     private final MenuItemRepository menuItemRepository;
     private final AppUserRepository appUserRepository;
+    private final CouponRepository couponRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     public void run(String... args) {
@@ -56,6 +58,10 @@ public class DataLoader implements CommandLineRunner {
         menuItemRepository.save(m12);
         menuItemRepository.save(m13);
 
+        // Seed some reviews for r1
+        reviewRepository.save(Review.builder().restaurant(r1).user(appUserRepository.findByEmail("admin@food.com").orElse(null)).rating(5).comment("Fantastic food!").approved(true).createdAt(java.time.OffsetDateTime.now().minusDays(2)).build());
+        reviewRepository.save(Review.builder().restaurant(r1).user(appUserRepository.findByEmail("admin@food.com").orElse(null)).rating(4).comment("Loved the paneer").approved(true).createdAt(java.time.OffsetDateTime.now().minusDays(1)).build());
+
         Restaurant r2 = Restaurant.builder()
                 .name("Pasta Piazza")
                 .cuisine("Italian")
@@ -88,6 +94,14 @@ public class DataLoader implements CommandLineRunner {
         menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Spring Rolls").description("Crispy veg rolls").price(new BigDecimal("4.49")).category("starters").available(true).imageUrl("https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1200&auto=format&fit=crop").build());
         menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Kung Pao Chicken").description("Spicy stir fry").price(new BigDecimal("9.49")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1553624973-9f6c0e24cf9b?q=80&w=1200&auto=format&fit=crop").build());
         menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Fried Rice").description("Egg fried rice").price(new BigDecimal("5.49")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1617692855027-7b4286a1af49?q=80&w=1200&auto=format&fit=crop").build());
+
+        // Seed coupons
+        if (couponRepository.findByCodeIgnoreCase("NEW50").isEmpty()) {
+            couponRepository.save(Coupon.builder().code("NEW50").percentageOff(new BigDecimal("50")).active(true).validFrom(java.time.OffsetDateTime.now().minusDays(1)).validUntil(java.time.OffsetDateTime.now().plusDays(30)).build());
+        }
+        if (couponRepository.findByCodeIgnoreCase("SAVE20").isEmpty()) {
+            couponRepository.save(Coupon.builder().code("SAVE20").percentageOff(new BigDecimal("20")).active(true).validFrom(java.time.OffsetDateTime.now().minusDays(1)).validUntil(java.time.OffsetDateTime.now().plusDays(60)).build());
+        }
 
         Restaurant r4 = Restaurant.builder()
                 .name("Taco Fiesta")

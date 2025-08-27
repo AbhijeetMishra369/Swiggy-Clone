@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import RestaurantCard from '../components/RestaurantCard';
+import { CardSkeleton } from '../components/Skeletons';
 import type { Restaurant } from '../types';
 import { useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,6 +10,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { motion } from 'framer-motion';
+import SmartImage from '../components/SmartImage';
 
 export default function Home() {
   const [params] = useSearchParams();
@@ -76,7 +78,7 @@ export default function Home() {
           {banners.map((b, i) => (
             <SwiperSlide key={i}>
               <div className="relative h-full">
-                <img src={b.image} alt={b.title} className="w-full h-full object-cover" />
+                <SmartImage src={b.image} alt={b.title} className="" eager />
                 <div className={`absolute inset-0 bg-gradient-to-r ${b.color}`} />
                 <div className="absolute inset-0 max-w-6xl mx-auto px-4 flex items-center">
                   <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="text-white">
@@ -109,7 +111,7 @@ export default function Home() {
         <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
           {(isLoading ? Array.from({ length: 8 }) : data)?.map((r: any, i: number) => (
             <motion.div whileHover={{ y: -3 }} key={r?.id ?? i} className="min-w-[250px]">
-              {r ? <RestaurantCard r={r} /> : <div className="rounded-xl border h-64 w-[250px] animate-pulse bg-gray-50" />}
+              {r ? <RestaurantCard r={r} /> : <CardSkeleton className="w-[250px]" />}
             </motion.div>
           ))}
         </div>
@@ -121,7 +123,7 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
           {(isLoading ? Array.from({ length: 8 }) : data)?.slice(0, page * 8).map((r: any, i: number) => (
             <motion.div key={r?.id ?? i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              {r ? <RestaurantCard r={r} /> : <div className="rounded-xl border h-64 animate-pulse bg-gray-50" />}
+              {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
             </motion.div>
           ))}
         </div>
@@ -135,7 +137,7 @@ export default function Home() {
           {[1,2,3,4,5,6,7,8].map((i) => (
             <motion.div key={i} whileHover={{ scale: 1.02 }} className="border rounded-xl overflow-hidden bg-white">
               <div className="h-28 bg-gray-100">
-                <img src={`https://images.unsplash.com/photo-15${40+i}674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop`} alt="dish" className="w-full h-full object-cover" />
+                <SmartImage src={`https://images.unsplash.com/photo-15${40+i}674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop`} alt="dish" />
               </div>
               <div className="p-3">
                 <p className="font-medium">Popular Dish {i}</p>
@@ -154,7 +156,7 @@ export default function Home() {
           {['Pizza','Biryani','Burgers','Desserts','Chinese','South Indian'].map((c) => (
             <motion.div key={c} whileHover={{ y: -3 }} className="rounded-xl overflow-hidden border bg-white">
               <div className="h-24 bg-gray-100">
-                <img src={`https://source.unsplash.com/800x600/?${encodeURIComponent(c)}&sig=1`} alt={c} className="w-full h-full object-cover" />
+                <SmartImage src={`https://source.unsplash.com/800x600/?${encodeURIComponent(c)}&sig=1`} alt={c} />
               </div>
               <div className="p-2 text-center text-sm font-medium">{c}</div>
             </motion.div>

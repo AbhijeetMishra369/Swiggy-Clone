@@ -26,7 +26,7 @@ export default function AdminRestaurants() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data?.map((r: any) => (
             <div key={r.id} className="border rounded-xl overflow-hidden">
-              <div className="h-32 bg-gray-50">{r.imageUrl && <img src={r.imageUrl} className="w-full h-full object-cover" />}</div>
+              <div className="h-32 bg-gray-50">{r.imageUrl && <img src={r.imageUrl} className="w-full h-full object-cover" loading="lazy" decoding="async" alt={r.name} />}</div>
               <div className="p-3">
                 <div className="font-medium">{r.name}</div>
                 <div className="text-sm text-gray-600">{r.cuisine} • {r.location}</div>

@@ -30,6 +30,7 @@ public class AdminController {
     private final CouponRepository couponRepository;
     private final AppUserRepository appUserRepository;
     private final ReviewRepository reviewRepository;
+    private final com.foodapp.service.OrderEventService orderEventService;
 
     // /admin/restaurants
     @GetMapping("/restaurants")
@@ -83,6 +84,15 @@ public class AdminController {
         var order = orderRepository.findById(id).orElseThrow();
         order.setStatus(status);
         // orderRepository.save(order); // transactional context will flush
+        try { orderEventService.emitStatus(id, status); } catch (Exception ignored) {}
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/orders/{id}/location")
+    public ResponseEntity<?> updateOrderLocation(@PathVariable Long id, @RequestBody java.util.Map<String, Double> body) {
+        double lat = body.getOrDefault("lat", 0.0);
+        double lng = body.getOrDefault("lng", 0.0);
+        try { orderEventService.emitLocation(id, lat, lng); } catch (Exception ignored) {}
         return ResponseEntity.ok().build();
     }
 

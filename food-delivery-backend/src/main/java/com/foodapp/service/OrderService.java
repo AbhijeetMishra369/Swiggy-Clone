@@ -19,8 +19,7 @@ public class OrderService {
     private final RestaurantRepository restaurantRepository;
     private final CouponRepository couponRepository;
 
-    @Transactional
-    public Order placeOrder(AppUser user, Cart cart, Long restaurantId, String couponCode) {
+    public Order computeOrder(AppUser user, Cart cart, Long restaurantId, String couponCode) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant not found"));
         Order order = new Order();
@@ -44,7 +43,6 @@ public class OrderService {
         final BigDecimal subtotalFinal = subtotal;
         BigDecimal discount = BigDecimal.ZERO;
         if (couponCode != null && !couponCode.isBlank()) {
-            // avoid capturing non-final variables inside lambda by assigning intermediate values
             couponRepository.findByCodeIgnoreCase(couponCode).ifPresent(c -> {
                 boolean active = Boolean.TRUE.equals(c.getActive());
                 boolean timeOk = (c.getValidFrom() == null || !OffsetDateTime.now().isBefore(c.getValidFrom()))
@@ -57,28 +55,30 @@ public class OrderService {
                     } else if (c.getAmountOff() != null) {
                         couponDiscount = c.getAmountOff();
                     }
-                    // set on order but do not modify outer discount var here
                     order.setDiscount(couponDiscount);
                 }
             });
         }
-        // Add NEW50 logic on top of any coupon only if applicable
         if ("NEW50".equalsIgnoreCase(couponCode)) {
             boolean isFirstOrder = orderRepository.findByUserOrderByCreatedAtDesc(user).isEmpty();
             if (isFirstOrder) {
                 discount = discount.add(subtotal.multiply(new BigDecimal("0.50")));
             }
         }
-        // Sum discount set on order (from coupon) with NEW50 extra if any
         if (order.getDiscount() != null) {
             discount = discount.add(order.getDiscount());
         }
-        // cap discount to subtotal minimum zero
         if (discount.compareTo(subtotal) > 0) {
             discount = subtotal;
         }
         order.setDiscount(discount);
         order.setTotal(subtotal.subtract(discount));
+        return order;
+    }
+
+    @Transactional
+    public Order placeOrder(AppUser user, Cart cart, Long restaurantId, String couponCode) {
+        Order order = computeOrder(user, cart, restaurantId, couponCode);
         return orderRepository.save(order);
     }
 
