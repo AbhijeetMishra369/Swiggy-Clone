@@ -42,19 +42,19 @@ export default function RestaurantDetails() {
   });
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="container">
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
-        <div className="h-52 md:h-64 bg-gray-50 relative">
+        <div className="h-44 md:h-56 bg-gray-50 relative">
           {restaurant?.imageUrl && (
             <SmartImage src={restaurant.imageUrl} alt={restaurant.name ?? 'Restaurant'} eager />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
-        <div className="p-5 flex items-center justify-between">
+        <div className="p-4 md:p-5 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-semibold">{restaurant?.name ?? 'Restaurant'}</h1>
-            <p className="text-gray-600">{restaurant?.cuisine} • {restaurant?.address?.city}</p>
-            <div className="text-sm text-gray-700 mt-1 flex items-center gap-3">
+            <h1 className="text-xl md:text-2xl font-semibold">{restaurant?.name ?? 'Restaurant'}</h1>
+            <p className="text-gray-600 text-sm md:text-base">{restaurant?.cuisine} • {restaurant?.address?.city}</p>
+            <div className="text-xs md:text-sm text-gray-700 mt-1 flex items-center gap-3">
               <span className="px-2 py-0.5 rounded-md bg-green-100 text-green-700">⭐ {restaurant?.averageRating ?? '4.3'}</span>
               <span>30-40 mins</span>
               <span>₹₹ for two</span>
@@ -65,7 +65,7 @@ export default function RestaurantDetails() {
           </div>
         </div>
       </div>
-      <div className="py-6 space-y-6">
+      <div className="py-5 space-y-6">
         {/* Mini category slider */}
         <Swiper modules={[FreeMode]} freeMode slidesPerView={3.5} spaceBetween={12} className="pb-1">
           {['starters','main course','beverages','desserts','sides'].map(cat => (
@@ -79,16 +79,16 @@ export default function RestaurantDetails() {
             <h2 className="text-xl font-semibold mb-3 capitalize">{section}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {menu?.filter(mi => mi.category.toLowerCase() === section).map(mi => (
-                <motion.div key={mi.id} whileHover={{ scale: 1.01 }} className="border border-gray-100 rounded-xl p-4 flex items-start justify-between bg-white gap-4">
-                  <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
+                <motion.div key={mi.id} whileHover={{ scale: 1.01 }} className="border border-gray-100 rounded-xl p-3 flex items-start justify-between bg-white gap-3">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
                     {mi.imageUrl && <SmartImage src={mi.imageUrl} alt={mi.name} />}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-gray-900">{mi.name}</h3>
-                    <p className="text-sm text-gray-600">{mi.description}</p>
-                    <p className="mt-1 font-semibold">₹ {mi.price}</p>
+                    <h3 className="font-medium text-gray-900 text-sm md:text-base">{mi.name}</h3>
+                    <p className="text-xs md:text-sm text-gray-600">{mi.description}</p>
+                    <p className="mt-1 font-semibold text-sm md:text-base">₹ {mi.price}</p>
                   </div>
-                  <button className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow hover:shadow-md transition" onClick={async () => {
+                  <button className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow hover:shadow-md transition text-sm" onClick={async () => {
                     dispatch(addToCart({ id: mi.id, name: mi.name, price: Number(mi.price), quantity: 1, restaurantId }));
                     try { await api.post('/api/cart/add', { menuItemId: mi.id, quantity: 1 }); } catch {}
                   }}>Add</button>

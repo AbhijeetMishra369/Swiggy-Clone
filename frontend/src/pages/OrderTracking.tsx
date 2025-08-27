@@ -52,7 +52,7 @@ export default function OrderTracking() {
   }, [orderId]);
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6">
+    <div className="container py-6">
       <h1 className="text-2xl font-semibold mb-2">Order Tracking</h1>
       <div className={`mb-3 px-3 py-2 rounded-md border ${currentStatus === 'OutForDelivery' ? 'bg-amber-50 text-amber-800 border-amber-100' : currentStatus === 'Delivered' ? 'bg-green-50 text-green-800 border-green-100' : 'bg-gray-50 text-gray-700 border-gray-100'}`}>
         {currentStatus === 'OutForDelivery' && 'Your order is on the way!'}

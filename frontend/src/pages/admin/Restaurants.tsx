@@ -10,7 +10,7 @@ export default function AdminRestaurants() {
   const delMut = useMutation({ mutationFn: async (id: number) => (await api.delete(`/api/admin/restaurants/${id}`)).data, onSuccess: () => qc.invalidateQueries({ queryKey: ['admin-restaurants'] }) });
 
   return (
-    <div className="space-y-6">
+    <div className="container py-6 space-y-6">
       <div className="rounded-xl border bg-white p-4">
         <h2 className="text-lg font-semibold mb-3">Add Restaurant</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">

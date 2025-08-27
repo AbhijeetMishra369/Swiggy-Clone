@@ -32,7 +32,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[70vh] grid place-items-center px-4">
+    <div className="min-h-[70vh] grid place-items-center container">
       <div className="w-full max-w-md">
         <div className="rounded-2xl border border-gray-100 bg-white dark:bg-gray-900 shadow-sm overflow-hidden">
           <div className="px-6 pt-6 text-center">

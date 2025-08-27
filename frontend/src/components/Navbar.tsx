@@ -15,12 +15,12 @@ export default function Navbar() {
   const count = items.reduce((s, i) => s + i.quantity, 0);
 
   return (
-    <nav className="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-100 dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-12 gap-4 items-center">
+    <nav className="sticky top-0 z-20 bg-white/90 dark:bg-gray-900/80 backdrop-blur border-b border-gray-100 dark:border-gray-800">
+      <div className="container py-2 grid grid-cols-12 gap-3 items-center">
         <div className="col-span-4 sm:col-span-3">
           <Link to="/" className="inline-flex items-center gap-2">
             <img src="/logo.svg" alt="Foodly" width={28} height={28} className="h-7 w-7" loading="eager" decoding="sync" />
-            <span className="text-xl font-semibold text-gray-900 dark:text-white tracking-tight">Foodly</span>
+            <span className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight">Foodly</span>
           </Link>
         </div>
         <div className="col-span-8 sm:col-span-6">

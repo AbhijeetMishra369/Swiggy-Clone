@@ -43,13 +43,13 @@ export default function AdminDashboard() {
           </div>
         </div>
         <div className="rounded-xl border bg-white p-4">
-          <div className="h-80">
+          <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data}>
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="sales" fill="#ff5a5f" />
+                <Bar dataKey="sales" fill="#ed6b00" />
               </BarChart>
             </ResponsiveContainer>
           </div>

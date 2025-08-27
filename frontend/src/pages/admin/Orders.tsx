@@ -9,7 +9,8 @@ export default function AdminOrders() {
   const mut = useMutation({ mutationFn: async ({ id, status }: any) => (await api.put(`/api/admin/orders/${id}/status`, { status })).data, onSuccess: () => qc.invalidateQueries({ queryKey: ['admin-orders'] }) });
 
   return (
-    <div className="rounded-xl border bg-white p-4">
+    <div className="container py-6">
+      <div className="rounded-xl border bg-white p-4">
       <h2 className="text-lg font-semibold mb-3">Orders</h2>
       <div className="space-y-3">
         {data?.map((o: any) => (
@@ -26,6 +27,7 @@ export default function AdminOrders() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

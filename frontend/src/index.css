@@ -13,7 +13,7 @@ body {
 
 /* Utilities */
 .container {
-  @apply max-w-6xl mx-auto px-4;
+  @apply max-w-7xl mx-auto px-3 md:px-4;
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -10,13 +10,13 @@ export default function CartPage() {
   const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
 
   return (
-    <div className="max-w-5xl mx-auto px-4">
+    <div className="container">
       <h1 className="text-2xl font-semibold py-6">Your Cart</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 space-y-3">
           {items.map(i => (
             <div key={i.id} className="flex items-center justify-between border rounded-xl p-4 bg-white shadow-sm gap-4">
-              <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
+              <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
                 <SmartImage src={`https://source.unsplash.com/200x200/?food&sig=${i.id}`} alt={i.name} />
               </div>
               <div className="flex-1">
