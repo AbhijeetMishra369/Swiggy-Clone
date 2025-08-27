@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import { motion } from 'framer-motion';
+import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
 import { addToast } from '../store/toastSlice';
 import { useAppDispatch } from '../store';
@@ -14,6 +15,7 @@ export default function OrderTracking() {
   const [liveStatus, setLiveStatus] = useState<string | null>(null);
   const [driver, setDriver] = useState<{ lat: number; lng: number } | null>(null);
   const dispatch = useAppDispatch();
+  const [eta, setEta] = useState<number>(30 * 60); // 30 minutes in seconds
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
     queryFn: async () => (await api.get(`/api/orders/${orderId}/track`)).data,
@@ -26,6 +28,7 @@ export default function OrderTracking() {
 
   useEffect(() => {
     if (!orderId) return;
+    const timer = setInterval(() => setEta((e) => Math.max(0, e - 1)), 1000);
     const ev = new EventSource(`${api.defaults.baseURL}/api/orders/${orderId}/events`);
     ev.addEventListener('status', (e: MessageEvent) => {
       setLiveStatus(String(e.data));
@@ -45,20 +48,20 @@ export default function OrderTracking() {
     ev.onerror = () => {
       ev.close();
     };
-    return () => ev.close();
+    return () => { ev.close(); clearInterval(timer); };
   }, [orderId]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
-      <h1 className="text-2xl font-semibold mb-4">Order Tracking</h1>
-      <div className="mb-4 h-48 rounded-xl border bg-gray-100 grid place-items-center relative overflow-hidden">
-        {/* Simple map mock */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
-        {driver ? (
-          <div className="relative z-10 text-sm bg-white px-2 py-1 rounded-md shadow">Driver at {driver.lat.toFixed(3)}, {driver.lng.toFixed(3)}</div>
-        ) : (
-          <div className="relative z-10 text-sm text-gray-600">Waiting for driver location…</div>
-        )}
+      <h1 className="text-2xl font-semibold mb-2">Order Tracking</h1>
+      <div className={`mb-3 px-3 py-2 rounded-md border ${currentStatus === 'OutForDelivery' ? 'bg-amber-50 text-amber-800 border-amber-100' : currentStatus === 'Delivered' ? 'bg-green-50 text-green-800 border-green-100' : 'bg-gray-50 text-gray-700 border-gray-100'}`}>
+        {currentStatus === 'OutForDelivery' && 'Your order is on the way!'}
+        {currentStatus === 'Preparing' && 'Restaurant is preparing your order'}
+        {currentStatus === 'Pending' && 'Order placed. Waiting for confirmation'}
+        {currentStatus === 'Delivered' && 'Delivered! Enjoy your meal'}
+      </div>
+      <div className="mb-4 h-60 rounded-xl border overflow-hidden relative">
+        <iframe title="map" className="absolute inset-0 w-full h-full" src={`https://maps.google.com/maps?q=${driver?.lat ?? 28.6139},${driver?.lng ?? 77.2090}&z=13&output=embed`} />
       </div>
       <div className="flex items-center justify-between">
         {steps.map((s, i) => (
@@ -83,7 +86,10 @@ export default function OrderTracking() {
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
           <div className="h-full bg-brand-600 transition-all" style={{ width: `${((idx + 1) / steps.length) * 100}%` }} />
         </div>
-        <div className="mt-2 text-sm text-gray-600">Status: {currentStatus ?? 'Loading...'}</div>
+        <div className="mt-2 text-sm text-gray-600 flex items-center justify-between">
+          <span>Status: {currentStatus ?? 'Loading...'}</span>
+          <span>ETA: {Math.floor(eta/60)}m {eta%60}s</span>
+        </div>
       </div>
     </div>
   );
