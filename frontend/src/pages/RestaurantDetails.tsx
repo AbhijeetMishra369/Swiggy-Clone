@@ -5,6 +5,9 @@ import type { MenuItem, Restaurant } from '../types';
 import { useAppDispatch } from '../store';
 import { addToCart } from '../store/cartSlice';
 import { motion } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper/modules';
+import 'swiper/css';
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -26,10 +29,11 @@ export default function RestaurantDetails() {
   return (
     <div className="max-w-5xl mx-auto px-4">
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
-        <div className="h-44 bg-gray-50 relative">
+        <div className="h-52 md:h-64 bg-gray-50 relative">
           {restaurant?.imageUrl && (
             <img src={restaurant.imageUrl} alt={restaurant.name} className="w-full h-full object-cover" />
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
         <div className="p-5 flex items-center justify-between">
           <div>
@@ -41,11 +45,22 @@ export default function RestaurantDetails() {
               <span>₹₹ for two</span>
             </div>
           </div>
+          <div className="hidden md:block text-right">
+            <div className="px-3 py-2 rounded-lg bg-amber-100 text-amber-800 text-sm font-medium">Use NEW50 for 50% OFF</div>
+          </div>
         </div>
       </div>
       <div className="py-6 space-y-6">
+        {/* Mini category slider */}
+        <Swiper modules={[FreeMode]} freeMode slidesPerView={3.5} spaceBetween={12} className="pb-1">
+          {['starters','main course','beverages','desserts','sides'].map(cat => (
+            <SwiperSlide key={cat}>
+              <a href={`#${cat}`} className="block px-4 py-2 rounded-full border hover:bg-gray-50 capitalize">{cat}</a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
         {['starters', 'main course', 'beverages'].map(section => (
-          <div key={section}>
+          <div key={section} id={section}>
             <h2 className="text-xl font-semibold mb-3 capitalize">{section}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {menu?.filter(mi => mi.category.toLowerCase() === section).map(mi => (
@@ -58,12 +73,7 @@ export default function RestaurantDetails() {
                     <p className="text-sm text-gray-600">{mi.description}</p>
                     <p className="mt-1 font-semibold">₹ {mi.price}</p>
                   </div>
-                  <button
-                    className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700"
-                    onClick={() => dispatch(addToCart({ id: mi.id, name: mi.name, price: Number(mi.price), quantity: 1, restaurantId }))}
-                  >
-                    Add
-                  </button>
+                  <button className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow hover:shadow-md transition" onClick={() => dispatch(addToCart({ id: mi.id, name: mi.name, price: Number(mi.price), quantity: 1, restaurantId }))}>Add</button>
                 </motion.div>
               ))}
             </div>

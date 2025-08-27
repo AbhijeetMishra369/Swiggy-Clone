@@ -27,6 +27,7 @@ public class OrderService {
         order.setUser(user);
         order.setRestaurant(restaurant);
         order.setStatus("Pending");
+        order.setPaymentStatus("PENDING");
         order.setCreatedAt(OffsetDateTime.now());
 
         BigDecimal subtotal = BigDecimal.ZERO;
@@ -43,8 +44,28 @@ public class OrderService {
         BigDecimal discount = BigDecimal.ZERO;
         if (couponCode != null && !couponCode.isBlank()) {
             couponRepository.findByCodeIgnoreCase(couponCode).ifPresent(c -> {
-                // simplistic discount logic
+                // apply coupon percentage or amount off if active and valid
+                boolean active = Boolean.TRUE.equals(c.getActive());
+                boolean timeOk = (c.getValidFrom() == null || !OffsetDateTime.now().isBefore(c.getValidFrom()))
+                        && (c.getValidUntil() == null || !OffsetDateTime.now().isAfter(c.getValidUntil()));
+                if (active && timeOk) {
+                    if (c.getPercentageOff() != null) {
+                        BigDecimal pct = c.getPercentageOff();
+                        BigDecimal off = subtotal.multiply(pct).divide(new BigDecimal("100"));
+                        order.setDiscount(off);
+                    } else if (c.getAmountOff() != null) {
+                        order.setDiscount(c.getAmountOff());
+                    }
+                }
             });
+        }
+        // NEW50: 50% off first order
+        if ("NEW50".equalsIgnoreCase(couponCode)) {
+            boolean isFirstOrder = orderRepository.findByUserOrderByCreatedAtDesc(user).isEmpty();
+            if (isFirstOrder) {
+                BigDecimal off = subtotal.multiply(new BigDecimal("0.50"));
+                discount = discount.add(off);
+            }
         }
         order.setDiscount(discount);
         order.setTotal(subtotal.subtract(discount));

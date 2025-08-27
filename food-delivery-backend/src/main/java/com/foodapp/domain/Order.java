@@ -37,5 +37,7 @@ public class Order {
 
     private String status; // Pending, Preparing, OutForDelivery, Delivered
 
+    private String paymentStatus; // PENDING, PAID, FAILED
+
     private OffsetDateTime createdAt;
 }

@@ -15,7 +15,9 @@ export default function CartPage() {
         <div className="md:col-span-2 space-y-3">
           {items.map(i => (
             <div key={i.id} className="flex items-center justify-between border rounded-xl p-4 bg-white shadow-sm gap-4">
-              <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0" />
+              <div className="w-20 h-20 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
+                <img src={`https://source.unsplash.com/200x200/?food&sig=${i.id}`} alt={i.name} className="w-full h-full object-cover" />
+              </div>
               <div className="flex-1">
                 <h3 className="font-medium">{i.name}</h3>
                 <p className="text-sm text-gray-600">₹ {i.price}</p>
@@ -36,6 +38,13 @@ export default function CartPage() {
               <span>Subtotal</span>
               <span>₹ {subtotal.toFixed(2)}</span>
             </div>
+            <div className="mt-2">
+              <div className="flex items-center gap-2">
+                <input placeholder="Coupon code" className="flex-1 border rounded-md px-3 py-2" />
+                <button className="px-3 py-2 rounded-md border">Apply</button>
+              </div>
+              <p className="text-xs text-green-600 mt-1">Use NEW50 for 50% off first order</p>
+            </div>
             <div className="flex items-center justify-between text-sm text-gray-700">
               <span>Delivery</span>
               <span>₹ 0.00</span>
@@ -46,6 +55,10 @@ export default function CartPage() {
               <span>₹ {subtotal.toFixed(2)}</span>
             </div>
             <button onClick={() => navigate('/checkout')} className="mt-4 w-full px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">Checkout</button>
+          </div>
+          <div className="mt-4 border rounded-xl p-4 bg-white shadow-sm">
+            <h4 className="font-semibold mb-2">Delivery Address</h4>
+            <div className="h-32 bg-gray-100 rounded-md grid place-items-center text-gray-500 text-sm">Map placeholder</div>
           </div>
         </div>
       </div>

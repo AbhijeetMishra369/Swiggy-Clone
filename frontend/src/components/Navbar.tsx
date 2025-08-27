@@ -21,14 +21,25 @@ export default function Navbar() {
           <Link to="/" className="text-xl font-semibold text-brand-600">Foodly</Link>
         </div>
         <div className="col-span-8 sm:col-span-6">
-          <form onSubmit={(e) => { e.preventDefault(); navigate(`/?q=${encodeURIComponent(q)}`); }}>
-            <input
-              className="w-full border border-gray-200 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
-              placeholder="Search for restaurants or cuisines"
-              value={q}
-              onChange={e => setQ(e.target.value)}
-            />
-          </form>
+          <div className="relative">
+            <form onSubmit={(e) => { e.preventDefault(); navigate(`/?q=${encodeURIComponent(q)}`); }}>
+              <input
+                className="w-full border border-gray-200 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
+                placeholder="Search for restaurants or cuisines"
+                value={q}
+                onChange={e => setQ(e.target.value)}
+              />
+            </form>
+            {q && (
+              <div className="absolute left-0 right-0 mt-2 rounded-lg border bg-white shadow-lg z-30">
+                <div className="p-2 text-xs text-gray-500">Suggestions</div>
+                <button onClick={() => navigate(`/?q=${encodeURIComponent(q)}`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Search "{q}"</button>
+                <button onClick={() => navigate(`/?q=pizza`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Pizza</button>
+                <button onClick={() => navigate(`/?q=biryani`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Biryani</button>
+                <button onClick={() => navigate(`/?q=burgers`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Burgers</button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="col-span-12 sm:col-span-3 flex justify-end items-center gap-5">
           <Link to="/restaurants" className="text-gray-700 dark:text-gray-200 hover:text-brand-600 hidden md:inline">Restaurants</Link>
@@ -49,11 +60,18 @@ export default function Navbar() {
             </div>
           )}
           {user && (
-            <div className="flex items-center gap-3">
-              <ThemeToggle />
-              {user.role === 'ADMIN' && <Link to="/admin" className="text-gray-700 hover:text-brand-600">Admin</Link>}
-              <Link to="/profile" className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-200 to-orange-300 grid place-items-center text-gray-700 dark:text-gray-900">{user.name.charAt(0)}</Link>
-              <button onClick={() => { dispatch(logout()); navigate('/'); }} className="text-gray-500 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100">Logout</button>
+            <div className="relative">
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                {user.role === 'ADMIN' && <Link to="/admin" className="text-gray-700 hover:text-brand-600">Admin</Link>}
+                <details className="relative">
+                  <summary className="list-none cursor-pointer w-8 h-8 rounded-full bg-gradient-to-br from-orange-200 to-orange-300 grid place-items-center text-gray-700 dark:text-gray-900">{user.name.charAt(0)}</summary>
+                  <div className="absolute right-0 mt-2 w-40 rounded-md border bg-white shadow-md z-30 py-2">
+                    <Link to="/profile" className="block px-3 py-1.5 hover:bg-gray-50">Profile</Link>
+                    <button onClick={() => { dispatch(logout()); navigate('/'); }} className="w-full text-left px-3 py-1.5 hover:bg-gray-50">Logout</button>
+                  </div>
+                </details>
+              </div>
             </div>
           )}
         </div>
