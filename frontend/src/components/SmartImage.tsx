@@ -15,7 +15,7 @@ export default function SmartImage({ src, alt, className = '', eager = false, si
     <img
       src={actualSrc}
       alt={alt}
-      className={`${className} w-full h-full object-cover`}
+      className={className || 'w-full h-full object-cover'}
       loading={eager ? 'eager' : 'lazy'}
       decoding={eager ? 'sync' : 'async'}
       sizes={sizes}
