@@ -10,6 +10,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { motion } from 'framer-motion';
+import SmartImage from '../components/SmartImage';
 
 export default function Home() {
   const [params] = useSearchParams();
@@ -77,7 +78,7 @@ export default function Home() {
           {banners.map((b, i) => (
             <SwiperSlide key={i}>
               <div className="relative h-full">
-                <img src={b.image} alt={b.title} className="w-full h-full object-cover" loading="eager" decoding="async" />
+                <SmartImage src={b.image} alt={b.title} className="" eager />
                 <div className={`absolute inset-0 bg-gradient-to-r ${b.color}`} />
                 <div className="absolute inset-0 max-w-6xl mx-auto px-4 flex items-center">
                   <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="text-white">
@@ -136,7 +137,7 @@ export default function Home() {
           {[1,2,3,4,5,6,7,8].map((i) => (
             <motion.div key={i} whileHover={{ scale: 1.02 }} className="border rounded-xl overflow-hidden bg-white">
               <div className="h-28 bg-gray-100">
-                <img src={`https://images.unsplash.com/photo-15${40+i}674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop`} alt="dish" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                <SmartImage src={`https://images.unsplash.com/photo-15${40+i}674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop`} alt="dish" />
               </div>
               <div className="p-3">
                 <p className="font-medium">Popular Dish {i}</p>
@@ -155,7 +156,7 @@ export default function Home() {
           {['Pizza','Biryani','Burgers','Desserts','Chinese','South Indian'].map((c) => (
             <motion.div key={c} whileHover={{ y: -3 }} className="rounded-xl overflow-hidden border bg-white">
               <div className="h-24 bg-gray-100">
-                <img src={`https://source.unsplash.com/800x600/?${encodeURIComponent(c)}&sig=1`} alt={c} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                <SmartImage src={`https://source.unsplash.com/800x600/?${encodeURIComponent(c)}&sig=1`} alt={c} />
               </div>
               <div className="p-2 text-center text-sm font-medium">{c}</div>
             </motion.div>

@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import { addToast } from '../store/toastSlice';
+import SmartImage from '../components/SmartImage';
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -45,7 +46,7 @@ export default function RestaurantDetails() {
       <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white">
         <div className="h-52 md:h-64 bg-gray-50 relative">
           {restaurant?.imageUrl && (
-            <img src={restaurant.imageUrl} alt={restaurant.name} className="w-full h-full object-cover" loading="eager" decoding="async" />
+            <SmartImage src={restaurant.imageUrl} alt={restaurant.name ?? 'Restaurant'} eager />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
@@ -80,7 +81,7 @@ export default function RestaurantDetails() {
               {menu?.filter(mi => mi.category.toLowerCase() === section).map(mi => (
                 <motion.div key={mi.id} whileHover={{ scale: 1.01 }} className="border border-gray-100 rounded-xl p-4 flex items-start justify-between bg-white gap-4">
                   <div className="w-24 h-24 rounded-lg overflow-hidden bg-gray-50 flex-shrink-0">
-                    {mi.imageUrl && <img src={mi.imageUrl} alt={mi.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />}
+                    {mi.imageUrl && <SmartImage src={mi.imageUrl} alt={mi.name} />}
                   </div>
                   <div className="flex-1">
                     <h3 className="font-medium text-gray-900">{mi.name}</h3>
