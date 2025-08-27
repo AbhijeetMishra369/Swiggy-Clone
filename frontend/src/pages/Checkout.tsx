@@ -59,7 +59,7 @@ export default function Checkout() {
           navigate(`/orders/${orderId}/track`);
         },
         prefill: {},
-        theme: { color: '#ff5a5f' },
+        theme: { color: '#ed6b00' },
       });
     } catch (e: any) {
       setError(e?.response?.data?.message || 'Payment init failed');
@@ -67,7 +67,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="container">
       <h1 className="text-2xl font-semibold py-6">Checkout</h1>
       {error && <p className="text-red-600">{error}</p>}
       <div className="border rounded-xl p-4 bg-white shadow-sm">
