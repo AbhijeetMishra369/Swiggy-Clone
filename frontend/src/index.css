@@ -7,6 +7,13 @@ html, body, #root {
   height: 100%;
 }
 
+/* Normalize base sizing to avoid oversized UI on some devices */
+html { font-size: 16px; }
+body { -webkit-text-size-adjust: 100%; }
+
+/* Media defaults */
+img, svg, video { max-width: 100%; height: auto; }
+
 body {
   @apply bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;
 }
