@@ -73,5 +73,48 @@ public class DataLoader implements CommandLineRunner {
         menuItemRepository.save(m21);
         menuItemRepository.save(m22);
         menuItemRepository.save(m23);
+
+        // Seed 3 more restaurants
+        Restaurant r3 = Restaurant.builder()
+                .name("Dragon Wok")
+                .cuisine("Chinese")
+                .phone("+1-555-3003")
+                .averageRating(new BigDecimal("4.2"))
+                .imageUrl("https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop")
+                .location("HSR Layout, Bengaluru")
+                .address(Address.builder().line1("9 HSR Layout").city("Bengaluru").state("KA").country("IN").postalCode("560102").build())
+                .build();
+        restaurantRepository.save(r3);
+        menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Spring Rolls").description("Crispy veg rolls").price(new BigDecimal("4.49")).category("starters").available(true).imageUrl("https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Kung Pao Chicken").description("Spicy stir fry").price(new BigDecimal("9.49")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1553624973-9f6c0e24cf9b?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r3).name("Fried Rice").description("Egg fried rice").price(new BigDecimal("5.49")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1617692855027-7b4286a1af49?q=80&w=1200&auto=format&fit=crop").build());
+
+        Restaurant r4 = Restaurant.builder()
+                .name("Taco Fiesta")
+                .cuisine("Mexican")
+                .phone("+1-555-4004")
+                .averageRating(new BigDecimal("4.1"))
+                .imageUrl("https://images.unsplash.com/photo-1617195737492-7e0a2b847222?q=80&w=1200&auto=format&fit=crop")
+                .location("Indiranagar, Bengaluru")
+                .address(Address.builder().line1("21 Indiranagar").city("Bengaluru").state("KA").country("IN").postalCode("560038").build())
+                .build();
+        restaurantRepository.save(r4);
+        menuItemRepository.save(MenuItem.builder().restaurant(r4).name("Nachos").description("Loaded cheese nachos").price(new BigDecimal("4.99")).category("starters").available(true).imageUrl("https://images.unsplash.com/photo-1604467794349-0b74285de7e6?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r4).name("Chicken Tacos").description("Soft shell tacos").price(new BigDecimal("7.99")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1551504734-5ee1c4a1479a?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r4).name("Churros").description("Cinnamon sugar dessert").price(new BigDecimal("3.99")).category("desserts").available(true).imageUrl("https://images.unsplash.com/photo-1514914108550-1b79b1801bd0?q=80&w=1200&auto=format&fit=crop").build());
+
+        Restaurant r5 = Restaurant.builder()
+                .name("Burger Barn")
+                .cuisine("American")
+                .phone("+1-555-5005")
+                .averageRating(new BigDecimal("4.0"))
+                .imageUrl("https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=1200&auto=format&fit=crop")
+                .location("Koramangala, Bengaluru")
+                .address(Address.builder().line1("66 Koramangala").city("Bengaluru").state("KA").country("IN").postalCode("560034").build())
+                .build();
+        restaurantRepository.save(r5);
+        menuItemRepository.save(MenuItem.builder().restaurant(r5).name("Classic Burger").description("Beef patty burger").price(new BigDecimal("8.49")).category("main course").available(true).imageUrl("https://images.unsplash.com/photo-1550547660-1b8a1c61a615?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r5).name("Fries").description("Crispy french fries").price(new BigDecimal("2.99")).category("sides").available(true).imageUrl("https://images.unsplash.com/photo-1550547660-3f8d9049e7a0?q=80&w=1200&auto=format&fit=crop").build());
+        menuItemRepository.save(MenuItem.builder().restaurant(r5).name("Milkshake").description("Vanilla shake").price(new BigDecimal("3.49")).category("beverages").available(true).imageUrl("https://images.unsplash.com/photo-1511910849309-0dffb82f8f9e?q=80&w=1200&auto=format&fit=crop").build());
     }
 }

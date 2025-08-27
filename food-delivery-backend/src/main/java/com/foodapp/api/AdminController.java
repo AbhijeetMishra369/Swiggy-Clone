@@ -4,6 +4,7 @@ import com.foodapp.domain.Coupon;
 import com.foodapp.domain.Restaurant;
 import com.foodapp.domain.MenuItem;
 import com.foodapp.repository.CouponRepository;
+import com.foodapp.repository.ReviewRepository;
 import com.foodapp.repository.OrderRepository;
 import com.foodapp.repository.RestaurantRepository;
 import com.foodapp.repository.MenuItemRepository;
@@ -28,6 +29,7 @@ public class AdminController {
     private final OrderRepository orderRepository;
     private final CouponRepository couponRepository;
     private final AppUserRepository appUserRepository;
+    private final ReviewRepository reviewRepository;
 
     // /admin/restaurants
     @GetMapping("/restaurants")
@@ -112,6 +114,18 @@ public class AdminController {
         AppUser u = appUserRepository.findById(id).orElseThrow();
         u.setBlocked(blocked);
         appUserRepository.save(u);
+        return ResponseEntity.ok().build();
+    }
+
+    // /admin/reviews
+    @GetMapping("/reviews")
+    public List<com.foodapp.domain.Review> listReviews() { return reviewRepository.findAll(); }
+    @PutMapping("/reviews/{id}/approve")
+    public ResponseEntity<?> approveReview(@PathVariable Long id, @RequestBody java.util.Map<String,Boolean> body) {
+        boolean approved = java.util.Objects.equals(body.get("approved"), Boolean.TRUE);
+        var r = reviewRepository.findById(id).orElseThrow();
+        r.setApproved(approved);
+        reviewRepository.save(r);
         return ResponseEntity.ok().build();
     }
 }
