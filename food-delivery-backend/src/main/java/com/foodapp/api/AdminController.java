@@ -30,6 +30,7 @@ public class AdminController {
     private final CouponRepository couponRepository;
     private final AppUserRepository appUserRepository;
     private final ReviewRepository reviewRepository;
+    private final com.foodapp.service.OrderEventService orderEventService;
 
     // /admin/restaurants
     @GetMapping("/restaurants")
@@ -83,6 +84,7 @@ public class AdminController {
         var order = orderRepository.findById(id).orElseThrow();
         order.setStatus(status);
         // orderRepository.save(order); // transactional context will flush
+        try { orderEventService.emitStatus(id, status); } catch (Exception ignored) {}
         return ResponseEntity.ok().build();
     }
 

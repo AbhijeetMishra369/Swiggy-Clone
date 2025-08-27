@@ -9,6 +9,7 @@ import com.foodapp.repository.CartRepository;
 import com.foodapp.repository.OrderRepository;
 import com.foodapp.service.OrderService;
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,7 @@ public class OrderController {
     private final AppUserRepository appUserRepository;
     private final CartRepository cartRepository;
     private final OrderRepository orderRepository;
+    private final com.foodapp.service.OrderEventService orderEventService;
 
     private AppUser currentUser(Authentication auth) {
         return appUserRepository.findByEmail(auth.getName()).orElseThrow();
@@ -39,6 +41,11 @@ public class OrderController {
     @GetMapping("/{id}/track")
     public ResponseEntity<Order> track(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.track(id));
+    }
+
+    @GetMapping("/{id}/events")
+    public SseEmitter events(@PathVariable Long id) {
+        return orderEventService.subscribe(id);
     }
 
     @PostMapping("/preview")

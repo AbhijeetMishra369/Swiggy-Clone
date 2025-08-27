@@ -2,20 +2,35 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 const steps = ['Pending', 'Preparing', 'OutForDelivery', 'Delivered'];
 
 export default function OrderTracking() {
   const { id } = useParams();
   const orderId = Number(id);
+  const [liveStatus, setLiveStatus] = useState<string | null>(null);
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
     queryFn: async () => (await api.get(`/api/orders/${orderId}/track`)).data,
-    refetchInterval: 5000,
+    refetchInterval: 30000,
     refetchOnWindowFocus: true,
     enabled: !!orderId,
   });
-  const idx = steps.findIndex(s => s === order?.status);
+  const currentStatus = liveStatus || order?.status;
+  const idx = steps.findIndex(s => s === currentStatus);
+
+  useEffect(() => {
+    if (!orderId) return;
+    const ev = new EventSource(`${api.defaults.baseURL}/api/orders/${orderId}/events`);
+    ev.addEventListener('status', (e: MessageEvent) => {
+      setLiveStatus(String(e.data));
+    });
+    ev.onerror = () => {
+      ev.close();
+    };
+    return () => ev.close();
+  }, [orderId]);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
@@ -38,6 +53,12 @@ export default function OrderTracking() {
             <span className="text-xs mt-2">{s}</span>
           </div>
         ))}
+      </div>
+      <div className="mt-6">
+        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-full bg-brand-600 transition-all" style={{ width: `${((idx + 1) / steps.length) * 100}%` }} />
+        </div>
+        <div className="mt-2 text-sm text-gray-600">Status: {currentStatus ?? 'Loading...'}</div>
       </div>
     </div>
   );
