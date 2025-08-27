@@ -49,6 +49,14 @@ export default function Checkout() {
       <h1 className="text-2xl font-semibold py-6">Checkout</h1>
       {error && <p className="text-red-600">{error}</p>}
       <div className="border rounded-xl p-4 bg-white shadow-sm">
+        <h3 className="font-semibold mb-2">Delivery Address</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+          <input className="border rounded-md px-3 py-2" placeholder="House / Flat No" />
+          <input className="border rounded-md px-3 py-2" placeholder="Street / Area" />
+          <input className="border rounded-md px-3 py-2" placeholder="City" />
+          <input className="border rounded-md px-3 py-2" placeholder="Postal Code" />
+        </div>
+        <div className="h-36 bg-gray-100 rounded-md grid place-items-center text-gray-500 text-sm mb-4">Map placeholder</div>
         <div className="flex items-center justify-between">
           <p className="text-lg">Total payable</p>
           <p className="text-2xl font-bold">₹ {subtotal.toFixed(2)}</p>
