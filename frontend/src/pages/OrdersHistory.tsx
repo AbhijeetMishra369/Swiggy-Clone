@@ -20,9 +20,9 @@ export default function OrdersHistory() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
+    <div className="container py-6">
       <h1 className="text-2xl font-semibold mb-4">Your Orders</h1>
-      <div className="space-y-4">
+      <div className="space-y-3">
         {data?.map((o: any) => (
           <div key={o.id} className="rounded-xl border bg-white p-4">
             <div className="flex items-center justify-between">

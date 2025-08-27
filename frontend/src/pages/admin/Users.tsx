@@ -7,9 +7,10 @@ export default function AdminUsers() {
   const mut = useMutation({ mutationFn: async ({ id, blocked }: any) => (await api.put(`/api/admin/users/${id}/block`, { blocked })).data, onSuccess: () => qc.invalidateQueries({ queryKey: ['admin-users'] }) });
 
   return (
-    <div className="rounded-xl border bg-white p-4">
-      <h2 className="text-lg font-semibold mb-3">Users</h2>
-      <div className="space-y-2">
+    <div className="container py-6">
+      <div className="rounded-xl border bg-white p-4">
+        <h2 className="text-lg font-semibold mb-3">Users</h2>
+        <div className="space-y-2">
         {data?.map((u: any) => (
           <div key={u.id} className="flex items-center justify-between border rounded-xl p-3">
             <div>
@@ -22,6 +23,7 @@ export default function AdminUsers() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
