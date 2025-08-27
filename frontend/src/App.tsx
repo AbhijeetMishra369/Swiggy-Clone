@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Toaster from './components/Toaster';
 import CartBar from './components/CartBar';
+import MobileNav from './components/MobileNav';
 import Home from './pages/Home';
 import RestaurantDetails from './pages/RestaurantDetails';
 import Restaurants from './pages/Restaurants';
@@ -33,6 +34,7 @@ function App() {
         <Navbar />
         <Toaster />
         <CartBar />
+        <MobileNav />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

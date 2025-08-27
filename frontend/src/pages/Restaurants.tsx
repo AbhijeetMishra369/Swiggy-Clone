@@ -10,16 +10,23 @@ export default function Restaurants() {
   const [params] = useSearchParams();
   const [query, setQuery] = useState('');
   const [cuisine, setCuisine] = useState('');
+  const [sort, setSort] = useState<'rating' | 'name'>('rating');
+  const [fastOnly, setFastOnly] = useState(false);
   useEffect(() => { setQuery(params.get('q') || ''); }, [params]);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['restaurants', cuisine, query],
+    queryKey: ['restaurants', cuisine, query, sort, fastOnly],
     queryFn: async () => {
       const req: any = {};
       if (cuisine) req.cuisine = cuisine;
       if (query) req.q = query;
       const res = await api.get<Restaurant[]>('/api/restaurants', { params: req });
-      return res.data;
+      let list = res.data;
+      if (sort === 'rating') list = list.sort((a: any, b: any) => (b.averageRating ?? 0) - (a.averageRating ?? 0));
+      if (sort === 'name') list = list.sort((a: any, b: any) => a.name.localeCompare(b.name));
+      // fastOnly is a UI-only filter; using name heuristic for demo
+      if (fastOnly) list = list.filter((r: any) => /pizza|burger|biryan/i.test(r.name + ' ' + r.cuisine));
+      return list;
     },
   });
 
@@ -36,6 +43,11 @@ export default function Restaurants() {
             <option>Chinese</option>
             <option>Mexican</option>
           </select>
+          <select value={sort} onChange={e => setSort(e.target.value as any)} className="border rounded-md px-3 py-2 dark:bg-gray-800 dark:border-gray-700">
+            <option value="rating">Top rated</option>
+            <option value="name">Name A-Z</option>
+          </select>
+          <button onClick={() => setFastOnly(v => !v)} className={`px-3 py-2 rounded-full border ${fastOnly ? 'bg-brand-600 text-white border-brand-600' : ''}`}>Fast Delivery</button>
         </div>
       </div>
       {error && <div className="rounded-md bg-red-50 text-red-700 text-sm px-3 py-2 border border-red-100">Failed to load restaurants</div>}

@@ -87,7 +87,10 @@ export default function RestaurantDetails() {
                     <p className="text-sm text-gray-600">{mi.description}</p>
                     <p className="mt-1 font-semibold">₹ {mi.price}</p>
                   </div>
-                  <button className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow hover:shadow-md transition" onClick={() => dispatch(addToCart({ id: mi.id, name: mi.name, price: Number(mi.price), quantity: 1, restaurantId }))}>Add</button>
+                  <button className="px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700 shadow hover:shadow-md transition" onClick={async () => {
+                    dispatch(addToCart({ id: mi.id, name: mi.name, price: Number(mi.price), quantity: 1, restaurantId }));
+                    try { await api.post('/api/cart/add', { menuItemId: mi.id, quantity: 1 }); } catch {}
+                  }}>Add</button>
                 </motion.div>
               ))}
             </div>

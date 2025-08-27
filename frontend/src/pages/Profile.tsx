@@ -17,6 +17,10 @@ export default function Profile() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [saved, setSaved] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem('saved_addresses') || '[]'); } catch { return []; }
+  });
+  const [newAddr, setNewAddr] = useState('');
 
   useEffect(() => {
     if (data) {
@@ -63,6 +67,27 @@ export default function Profile() {
           <button onClick={() => saveMut.mutate()} disabled={saveMut.isPending} className="px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">Save changes</button>
           <span className="text-sm text-gray-500">Role: {user?.role}</span>
         </div>
+      </div>
+      <div className="mt-4 border rounded-xl p-4 bg-white dark:bg-gray-900">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="font-semibold">Saved Addresses</h2>
+          <div className="flex items-center gap-2">
+            <input value={newAddr} onChange={e => setNewAddr(e.target.value)} placeholder="Add new address" className="border rounded-md px-3 py-2 dark:bg-gray-800 dark:border-gray-700" />
+            <button onClick={() => { if (!newAddr.trim()) return; const next = [...saved, newAddr.trim()]; setSaved(next); localStorage.setItem('saved_addresses', JSON.stringify(next)); setNewAddr(''); dispatch(addToast({ message: 'Address saved', type: 'success' })); }} className="px-3 py-2 rounded-md border">Save</button>
+          </div>
+        </div>
+        <ul className="space-y-2">
+          {saved.map((a, i) => (
+            <li key={i} className="flex items-center justify-between border rounded-md px-3 py-2">
+              <span className="text-sm">{a}</span>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setAddress(a)} className="text-brand-600">Use</button>
+                <button onClick={() => { const next = saved.filter((_, idx) => idx !== i); setSaved(next); localStorage.setItem('saved_addresses', JSON.stringify(next)); }} className="text-red-600">Delete</button>
+              </div>
+            </li>
+          ))}
+          {saved.length === 0 && <li className="text-sm text-gray-500">No saved addresses yet</li>}
+        </ul>
       </div>
     </div>
   );
