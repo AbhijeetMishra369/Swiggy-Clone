@@ -18,25 +18,28 @@ export default function Navbar() {
     <nav className="sticky top-0 z-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-100 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-12 gap-4 items-center">
         <div className="col-span-4 sm:col-span-3">
-          <Link to="/" className="text-xl font-semibold text-brand-600">Foodly</Link>
+          <Link to="/" className="inline-flex items-center gap-2">
+            <img src="/logo.svg" alt="Foodly" width={28} height={28} className="h-7 w-7" loading="eager" decoding="sync" />
+            <span className="text-xl font-semibold text-gray-900 dark:text-white tracking-tight">Foodly</span>
+          </Link>
         </div>
         <div className="col-span-8 sm:col-span-6">
           <div className="relative">
             <form onSubmit={(e) => { e.preventDefault(); navigate(`/?q=${encodeURIComponent(q)}`); }}>
               <input
-                className="w-full border border-gray-200 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
+                className="w-full border border-gray-200 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-600 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                 placeholder="Search for restaurants or cuisines"
                 value={q}
                 onChange={e => setQ(e.target.value)}
               />
             </form>
             {q && (
-              <div className="absolute left-0 right-0 mt-2 rounded-lg border bg-white shadow-lg z-30">
+              <div className="absolute left-0 right-0 mt-2 rounded-lg border bg-white dark:bg-gray-900 shadow-lg z-30">
                 <div className="p-2 text-xs text-gray-500">Suggestions</div>
-                <button onClick={() => navigate(`/?q=${encodeURIComponent(q)}`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Search "{q}"</button>
-                <button onClick={() => navigate(`/?q=pizza`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Pizza</button>
-                <button onClick={() => navigate(`/?q=biryani`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Biryani</button>
-                <button onClick={() => navigate(`/?q=burgers`)} className="w-full text-left px-3 py-2 hover:bg-gray-50">Burgers</button>
+                <button onClick={() => navigate(`/?q=${encodeURIComponent(q)}`)} className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Search "{q}"</button>
+                <button onClick={() => navigate(`/?q=pizza`)} className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Pizza</button>
+                <button onClick={() => navigate(`/?q=biryani`)} className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Biryani</button>
+                <button onClick={() => navigate(`/?q=burgers`)} className="w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-800">Burgers</button>
               </div>
             )}
           </div>
@@ -66,9 +69,9 @@ export default function Navbar() {
                 {user.role === 'ADMIN' && <Link to="/admin" className="text-gray-700 hover:text-brand-600">Admin</Link>}
                 <details className="relative">
                   <summary className="list-none cursor-pointer w-8 h-8 rounded-full bg-gradient-to-br from-orange-200 to-orange-300 grid place-items-center text-gray-700 dark:text-gray-900">{user.name.charAt(0)}</summary>
-                  <div className="absolute right-0 mt-2 w-40 rounded-md border bg-white shadow-md z-30 py-2">
-                    <Link to="/profile" className="block px-3 py-1.5 hover:bg-gray-50">Profile</Link>
-                    <button onClick={() => { dispatch(logout()); navigate('/'); }} className="w-full text-left px-3 py-1.5 hover:bg-gray-50">Logout</button>
+                  <div className="absolute right-0 mt-2 w-40 rounded-md border bg-white dark:bg-gray-900 shadow-md z-30 py-2">
+                    <Link to="/profile" className="block px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800">Profile</Link>
+                    <button onClick={() => { dispatch(logout()); navigate('/'); }} className="w-full text-left px-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-800">Logout</button>
                   </div>
                 </details>
               </div>
