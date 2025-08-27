@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addToast } from '../store/toastSlice';
 import { useAppDispatch } from '../store';
+import { clearCart } from '../store/cartSlice';
 
 export default function Checkout() {
   const items = useAppSelector(s => s.cart.items);
@@ -53,6 +54,8 @@ export default function Checkout() {
         order_id: providerOrderId,
         handler: async (response: any) => {
           await api.post('/api/payment/verify', response);
+          dispatch(clearCart());
+          dispatch(addToast({ message: 'Payment successful', type: 'success' }));
           navigate(`/orders/${orderId}/track`);
         },
         prefill: {},

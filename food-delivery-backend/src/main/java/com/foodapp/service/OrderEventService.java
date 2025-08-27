@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class OrderEventService {
     private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
+    private final Map<Long, String> latestStatus = new ConcurrentHashMap<>();
 
     public SseEmitter subscribe(Long orderId) {
         SseEmitter emitter = new SseEmitter(0L);
@@ -18,12 +19,15 @@ public class OrderEventService {
         emitter.onTimeout(() -> emitters.remove(orderId));
         try {
             emitter.send(SseEmitter.event().name("connected").data("ok"));
+            String status = latestStatus.get(orderId);
+            if (status != null) emitter.send(SseEmitter.event().name("status").data(status));
         } catch (IOException ignored) {}
         return emitter;
     }
 
     public void emitStatus(Long orderId, String status) {
         SseEmitter emitter = emitters.get(orderId);
+        latestStatus.put(orderId, status);
         if (emitter == null) return;
         try {
             emitter.send(SseEmitter.event().name("status").data(status));
