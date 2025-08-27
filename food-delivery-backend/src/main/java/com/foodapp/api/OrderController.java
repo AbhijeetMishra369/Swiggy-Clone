@@ -41,6 +41,18 @@ public class OrderController {
         return ResponseEntity.ok(orderService.track(id));
     }
 
+    @PostMapping("/preview")
+    public ResponseEntity<?> preview(@Valid @RequestBody PlaceOrderRequest req, Authentication auth) {
+        AppUser user = currentUser(auth);
+        Cart cart = cartRepository.findByUser(user).orElseThrow();
+        Order tmp = orderService.computeOrder(user, cart, req.getRestaurantId(), req.getCouponCode());
+        return ResponseEntity.ok(java.util.Map.of(
+                "subtotal", tmp.getSubtotal(),
+                "discount", tmp.getDiscount(),
+                "total", tmp.getTotal()
+        ));
+    }
+
     @GetMapping("/history")
     public ResponseEntity<?> history(Authentication auth) {
         AppUser user = currentUser(auth);

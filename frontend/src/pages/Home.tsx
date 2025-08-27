@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import RestaurantCard from '../components/RestaurantCard';
+import { CardSkeleton } from '../components/Skeletons';
 import type { Restaurant } from '../types';
 import { useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -109,7 +110,7 @@ export default function Home() {
         <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
           {(isLoading ? Array.from({ length: 8 }) : data)?.map((r: any, i: number) => (
             <motion.div whileHover={{ y: -3 }} key={r?.id ?? i} className="min-w-[250px]">
-              {r ? <RestaurantCard r={r} /> : <div className="rounded-xl border h-64 w-[250px] animate-pulse bg-gray-50" />}
+              {r ? <RestaurantCard r={r} /> : <CardSkeleton className="w-[250px]" />}
             </motion.div>
           ))}
         </div>
@@ -121,7 +122,7 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
           {(isLoading ? Array.from({ length: 8 }) : data)?.slice(0, page * 8).map((r: any, i: number) => (
             <motion.div key={r?.id ?? i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              {r ? <RestaurantCard r={r} /> : <div className="rounded-xl border h-64 animate-pulse bg-gray-50" />}
+              {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
             </motion.div>
           ))}
         </div>

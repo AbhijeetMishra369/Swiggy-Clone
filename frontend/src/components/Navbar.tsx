@@ -45,7 +45,10 @@ export default function Navbar() {
           </div>
         </div>
         <div className="col-span-12 sm:col-span-3 flex justify-end items-center gap-5">
-          <Link to="/restaurants" className="text-gray-700 dark:text-gray-200 hover:text-brand-600 hidden md:inline">Restaurants</Link>
+          <Link to="/restaurants" className="text-gray-700 dark:text-gray-200 hover:text-brand-600 hidden md:inline inline-flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M11.25 3.75a.75.75 0 011.5 0v8.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3.75z"/></svg>
+            Restaurants
+          </Link>
           <Link to="/cart" className="relative inline-flex">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-gray-700 dark:text-gray-200 hover:text-brand-600">
               <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.1 0 .19.065.223.16l.716 2.149 1.33 7.721A2.25 2.25 0 008.117 15h8.514a2.25 2.25 0 002.212-1.82l.86-4.72a.75.75 0 00-.737-.88H6.53l-.39-2.335A1.875 1.875 0 004.886 3.75H2.25z" />
@@ -66,7 +69,10 @@ export default function Navbar() {
             <div className="relative">
               <div className="flex items-center gap-3">
                 <ThemeToggle />
-                {user.role === 'ADMIN' && <Link to="/admin" className="text-gray-700 hover:text-brand-600">Admin</Link>}
+                {user.role === 'ADMIN' && <Link to="/admin" className="text-gray-700 hover:text-brand-600 inline-flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9.75 8.25h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 010-1.5zM9.75 12h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 010-1.5z"/></svg>
+                  Admin
+                </Link>}
                 <details className="relative">
                   <summary className="list-none cursor-pointer w-8 h-8 rounded-full bg-gradient-to-br from-orange-200 to-orange-300 grid place-items-center text-gray-700 dark:text-gray-900">{user.name.charAt(0)}</summary>
                   <div className="absolute right-0 mt-2 w-40 rounded-md border bg-white dark:bg-gray-900 shadow-md z-30 py-2">

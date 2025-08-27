@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api';
 import type { Restaurant } from '../types';
 import RestaurantCard from '../components/RestaurantCard';
+import { CardSkeleton } from '../components/Skeletons';
 
 export default function Restaurants() {
   const [params] = useSearchParams();
@@ -41,11 +42,7 @@ export default function Restaurants() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {(isLoading ? Array.from({ length: 9 }) : data)?.map((r: any, i: number) => (
           <div key={r?.id ?? i}>
-            {r ? (
-              <RestaurantCard r={r} />
-            ) : (
-              <div className="rounded-xl border h-64 animate-pulse bg-gray-50" />
-            )}
+            {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
           </div>
         ))}
       </div>
