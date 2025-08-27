@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-100 dark:border-gray-800 mt-8 bg-white/60 dark:bg-gray-900/60 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-600 dark:text-gray-300">
+    <footer className="border-t border-gray-100 dark:border-gray-800 mt-6 bg-white/60 dark:bg-gray-900/60 backdrop-blur">
+      <div className="container py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-600 dark:text-gray-300">
         <div>
           <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-3">Foodly</h4>
           <p className="text-gray-500 dark:text-gray-400">Delicious food delivered fast.</p>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-4 py-6 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
+      <div className="container py-5 text-xs text-gray-500 dark:text-gray-400 flex items-center justify-between">
         <p>© {new Date().getFullYear()} Foodly</p>
         <p>Made with ❤️ for great food</p>
       </div>
