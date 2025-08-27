@@ -31,5 +31,16 @@ public class OrderEventService {
             emitters.remove(orderId);
         }
     }
+
+    public void emitLocation(Long orderId, double lat, double lng) {
+        SseEmitter emitter = emitters.get(orderId);
+        if (emitter == null) return;
+        try {
+            String payload = lat + "," + lng;
+            emitter.send(SseEmitter.event().name("location").data(payload));
+        } catch (IOException e) {
+            emitters.remove(orderId);
+        }
+    }
 }
 

@@ -88,6 +88,14 @@ public class AdminController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/orders/{id}/location")
+    public ResponseEntity<?> updateOrderLocation(@PathVariable Long id, @RequestBody java.util.Map<String, Double> body) {
+        double lat = body.getOrDefault("lat", 0.0);
+        double lng = body.getOrDefault("lng", 0.0);
+        try { orderEventService.emitLocation(id, lat, lng); } catch (Exception ignored) {}
+        return ResponseEntity.ok().build();
+    }
+
     // /admin/coupons
     @GetMapping("/coupons")
     public List<Coupon> listCoupons() { return couponRepository.findAll(); }

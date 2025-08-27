@@ -73,6 +73,10 @@ export default function Navbar() {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9.75 8.25h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 010-1.5zM9.75 12h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 010-1.5z"/></svg>
                   Admin
                 </Link>}
+                <Link to="/orders" className="text-gray-700 hover:text-brand-600 hidden md:inline-flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M6 7.5A1.5 1.5 0 017.5 6h9A1.5 1.5 0 0118 7.5v9A1.5 1.5 0 0116.5 18h-9A1.5 1.5 0 016 16.5v-9z"/></svg>
+                  Orders
+                </Link>
                 <details className="relative">
                   <summary className="list-none cursor-pointer w-8 h-8 rounded-full bg-gradient-to-br from-orange-200 to-orange-300 grid place-items-center text-gray-700 dark:text-gray-900">{user.name.charAt(0)}</summary>
                   <div className="absolute right-0 mt-2 w-40 rounded-md border bg-white dark:bg-gray-900 shadow-md z-30 py-2">

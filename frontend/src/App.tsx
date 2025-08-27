@@ -20,6 +20,7 @@ import AdminRestaurants from './pages/admin/Restaurants';
 import AdminOrders from './pages/admin/Orders';
 import AdminCoupons from './pages/admin/Coupons';
 import AdminUsers from './pages/admin/Users';
+import OrdersHistory from './pages/OrdersHistory';
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/orders/:id/track" element={<OrderTracking />} />
+            <Route path="/orders" element={<OrdersHistory />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
 
