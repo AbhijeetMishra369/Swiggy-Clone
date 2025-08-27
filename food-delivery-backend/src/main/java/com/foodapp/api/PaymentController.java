@@ -48,7 +48,7 @@ public class PaymentController {
         orderReq.put("amount", amount);
         orderReq.put("currency", "INR");
         orderReq.put("receipt", receipt);
-        rpOrder = client.Orders.create(orderReq);
+        rpOrder = client.orders.create(orderReq);
 
         Order appOrder = orderRepository.findById(orderId).orElseThrow();
         appOrder.setPaymentStatus("PENDING");
@@ -96,6 +96,14 @@ public class PaymentController {
         SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
         mac.init(secretKeySpec);
         byte[] rawHmac = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
-        return Base64.getEncoder().encodeToString(rawHmac);
+        return toHexLowercase(rawHmac);
+    }
+
+    private static String toHexLowercase(byte[] bytes) {
+        StringBuilder sb = new StringBuilder(bytes.length * 2);
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
 }
