@@ -41,31 +41,41 @@ public class OrderService {
             subtotal = subtotal.add(ci.getMenuItem().getPrice().multiply(BigDecimal.valueOf(ci.getQuantity())));
         }
         order.setSubtotal(subtotal);
+        final BigDecimal subtotalFinal = subtotal;
         BigDecimal discount = BigDecimal.ZERO;
         if (couponCode != null && !couponCode.isBlank()) {
+            // avoid capturing non-final variables inside lambda by assigning intermediate values
             couponRepository.findByCodeIgnoreCase(couponCode).ifPresent(c -> {
-                // apply coupon percentage or amount off if active and valid
                 boolean active = Boolean.TRUE.equals(c.getActive());
                 boolean timeOk = (c.getValidFrom() == null || !OffsetDateTime.now().isBefore(c.getValidFrom()))
                         && (c.getValidUntil() == null || !OffsetDateTime.now().isAfter(c.getValidUntil()));
                 if (active && timeOk) {
+                    BigDecimal couponDiscount = BigDecimal.ZERO;
                     if (c.getPercentageOff() != null) {
                         BigDecimal pct = c.getPercentageOff();
-                        BigDecimal off = subtotal.multiply(pct).divide(new BigDecimal("100"));
-                        order.setDiscount(off);
+                        couponDiscount = subtotalFinal.multiply(pct).divide(new BigDecimal("100"));
                     } else if (c.getAmountOff() != null) {
-                        order.setDiscount(c.getAmountOff());
+                        couponDiscount = c.getAmountOff();
                     }
+                    // set on order but do not modify outer discount var here
+                    order.setDiscount(couponDiscount);
                 }
             });
         }
-        // NEW50: 50% off first order
+        // Add NEW50 logic on top of any coupon only if applicable
         if ("NEW50".equalsIgnoreCase(couponCode)) {
             boolean isFirstOrder = orderRepository.findByUserOrderByCreatedAtDesc(user).isEmpty();
             if (isFirstOrder) {
-                BigDecimal off = subtotal.multiply(new BigDecimal("0.50"));
-                discount = discount.add(off);
+                discount = discount.add(subtotal.multiply(new BigDecimal("0.50")));
             }
+        }
+        // Sum discount set on order (from coupon) with NEW50 extra if any
+        if (order.getDiscount() != null) {
+            discount = discount.add(order.getDiscount());
+        }
+        // cap discount to subtotal minimum zero
+        if (discount.compareTo(subtotal) > 0) {
+            discount = subtotal;
         }
         order.setDiscount(discount);
         order.setTotal(subtotal.subtract(discount));
