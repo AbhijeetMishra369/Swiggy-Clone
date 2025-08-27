@@ -1,19 +1,3 @@
 package com.foodapp.dto;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
-@Data
-public class AddToCartRequest {
-    @NotNull
-    private Long menuItemId;
-    @Min(1)
-    private int quantity;
-}
-
-@Data
-public class RemoveFromCartRequest {
-    @NotNull
-    private Long cartItemId;
-}
+// Intentionally left empty to avoid multiple public class definitions in one file.
