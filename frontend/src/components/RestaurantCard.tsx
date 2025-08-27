@@ -12,12 +12,16 @@ export default function RestaurantCard({ r }: { r: Restaurant }) {
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-orange-200" />
         )}
+        <div className="absolute top-2 left-2 px-2 py-0.5 text-xs rounded-md bg-black/70 text-white">50% OFF</div>
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900">{r.name}</h3>
         <p className="text-sm text-gray-600">{r.cuisine} • {r.address?.city}</p>
         <div className="flex items-center gap-3 mt-2 text-sm text-gray-700">
-          <span className="px-2 py-0.5 rounded-md bg-green-100 text-green-700">⭐ {r.averageRating ?? '4.3'}</span>
+          <span className="px-2 py-0.5 rounded-md bg-green-100 text-green-700 inline-flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.788 1.402 8.176L12 18.896l-7.336 3.878 1.402-8.176L.132 9.21l8.2-1.192L12 .587z"/></svg>
+            {r.averageRating ?? '4.3'}
+          </span>
           <span>30-40 mins</span>
           <span>₹₹ for two</span>
         </div>

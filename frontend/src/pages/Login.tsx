@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { api, setAuthToken } from '../lib/api';
 import { useAppDispatch } from '../store';
 import { authError, loginSuccess } from '../store/authSlice';
+import { addToast } from '../store/toastSlice';
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -19,12 +20,14 @@ export default function Login() {
       const { token, id, name, role } = res.data;
       setAuthToken(token);
       dispatch(loginSuccess({ token, user: { id, email, name, role } }));
+      dispatch(addToast({ message: 'Logged in successfully', type: 'success' }));
       if (role === 'ADMIN') navigate('/admin');
       else navigate('/');
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Login failed';
       setError(msg);
       dispatch(authError(msg));
+      dispatch(addToast({ message: msg, type: 'error' }));
     }
   };
 

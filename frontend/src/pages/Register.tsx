@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../lib/api';
+import { addToast } from '../store/toastSlice';
+import { useAppDispatch } from '../store';
 
 export default function Register() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,10 +19,12 @@ export default function Register() {
     setError(null);
     try {
       await api.post('/auth/register', { name, email, password, phone, address });
+      dispatch(addToast({ message: 'Account created! Please login', type: 'success' }));
       navigate('/login');
     } catch (err: any) {
       const msg = err?.response?.data?.message || 'Registration failed';
       setError(msg);
+      dispatch(addToast({ message: msg, type: 'error' }));
     }
   };
 

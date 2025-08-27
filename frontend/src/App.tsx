@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Toaster from './components/Toaster';
+import CartBar from './components/CartBar';
 import Home from './pages/Home';
 import RestaurantDetails from './pages/RestaurantDetails';
 import Restaurants from './pages/Restaurants';
@@ -30,6 +31,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Toaster />
+        <CartBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
