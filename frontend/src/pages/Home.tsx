@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { motion } from 'framer-motion';
 import SmartImage from '../components/SmartImage';
+import Carousel from '../components/Carousel';
 
 export default function Home() {
   const [params] = useSearchParams();
@@ -104,17 +105,17 @@ export default function Home() {
       </div>
 
       <div className="container py-6">
-        {/* Popular Restaurants (horizontal scroll) */}
+        {/* Featured Restaurants (carousel) */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">Popular Restaurants Near You</h2>
+          <h2 className="text-xl font-semibold">Featured Restaurants</h2>
         </div>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+        <Carousel withPagination autoplayMs={3500}>
           {(isLoading ? Array.from({ length: 8 }) : data)?.map((r: any, i: number) => (
-            <motion.div whileHover={{ y: -3 }} key={r?.id ?? i} className="min-w-[250px]">
-              {r ? <RestaurantCard r={r} /> : <CardSkeleton className="w-[250px]" />}
-            </motion.div>
+            <div key={r?.id ?? i} className="h-full">
+              {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
+            </div>
           ))}
-        </div>
+        </Carousel>
 
         {/* Top Offers */}
         <div className="flex items-center justify-between mb-4">
@@ -129,11 +130,11 @@ export default function Home() {
         </div>
         <div ref={loadMoreRef} className="h-6" />
 
-        {/* Trending Dishes */}
+        {/* Trending Dishes (carousel on mobile) */}
         <div className="mt-10 flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Trending Dishes</h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-4">
           {[1,2,3,4,5,6,7,8].map((i) => (
             <motion.div key={i} whileHover={{ scale: 1.02 }} className="border rounded-xl overflow-hidden bg-white">
               <div className="h-24 bg-gray-100">
@@ -146,6 +147,22 @@ export default function Home() {
               </div>
             </motion.div>
           ))}
+        </div>
+        <div className="md:hidden">
+          <Carousel slidesPerView={{ 0: 1.2, 480: 1.6 }} spaceBetween={10} autoplayMs={3500}>
+            {[1,2,3,4,5,6,7,8].map((i) => (
+              <div key={i} className="border rounded-xl overflow-hidden bg-white">
+                <div className="h-24 bg-gray-100">
+                  <SmartImage src={`https://images.unsplash.com/photo-15${40+i}674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop`} alt="dish" />
+                </div>
+                <div className="p-3">
+                  <p className="font-medium">Popular Dish {i}</p>
+                  <p className="text-sm text-gray-600">₹ {149 + i * 10}</p>
+                  <button className="mt-2 w-full px-3 py-1.5 rounded-md bg-brand-600 text-white hover:bg-brand-700">Add to Cart</button>
+                </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
 
         {/* Cuisine Categories */}

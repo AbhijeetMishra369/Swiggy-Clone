@@ -65,6 +65,11 @@ export default function Restaurants() {
       </div>
       <FiltersBar fastOnly={fastOnly} setFastOnly={setFastOnly} />
       {error && <div className="rounded-md bg-red-50 text-red-700 text-sm px-3 py-2 border border-red-100">Failed to load restaurants</div>}
+      {!isLoading && !error && (!data || data.length === 0) && (
+        <div className="mt-6 rounded-xl border bg-white p-6 text-center text-sm text-gray-600">
+          No restaurants match your filters. Try clearing filters or searching a different term.
+        </div>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {(isLoading ? Array.from({ length: 9 }) : data)?.map((r: any, i: number) => (
           <div key={r?.id ?? i}>
