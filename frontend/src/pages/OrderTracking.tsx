@@ -11,6 +11,8 @@ export default function OrderTracking() {
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
     queryFn: async () => (await api.get(`/api/orders/${orderId}/track`)).data,
+    refetchInterval: 5000,
+    refetchOnWindowFocus: true,
     enabled: !!orderId,
   });
   const idx = steps.findIndex(s => s === order?.status);

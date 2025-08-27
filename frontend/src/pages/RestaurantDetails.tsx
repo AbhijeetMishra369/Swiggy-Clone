@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import type { MenuItem, Restaurant } from '../types';
 import { useAppDispatch } from '../store';
@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
+import { addToast } from '../store/toastSlice';
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -24,6 +25,19 @@ export default function RestaurantDetails() {
     queryKey: ['menu', restaurantId],
     queryFn: async () => (await api.get<MenuItem[]>(`/api/restaurants/${restaurantId}/menu`)).data,
     enabled: !!restaurantId,
+  });
+
+  const qc = useQueryClient();
+  const { data: reviews } = useQuery({
+    queryKey: ['reviews', restaurantId],
+    queryFn: async () => (await api.get(`/api/restaurants/${restaurantId}/reviews`)).data,
+    enabled: !!restaurantId,
+  });
+
+  const createReview = useMutation({
+    mutationFn: async (payload: { rating: number; comment: string }) => (await api.post(`/api/restaurants/${restaurantId}/reviews`, payload)).data,
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ['reviews', restaurantId] }); dispatch(addToast({ message: 'Review submitted', type: 'success' })); },
+    onError: () => { dispatch(addToast({ message: 'Failed to submit review', type: 'error' })); },
   });
 
   return (
@@ -79,6 +93,36 @@ export default function RestaurantDetails() {
             </div>
           </div>
         ))}
+
+        {/* Reviews */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-2">
+            <h2 className="text-xl font-semibold mb-3">Recent Reviews</h2>
+            <div className="space-y-3">
+              {reviews?.length ? reviews.map((rv: any) => (
+                <div key={rv.id} className="rounded-xl border p-3 bg-white">
+                  <div className="flex items-center justify-between">
+                    <div className="font-medium">{rv.user?.name ?? 'User'}</div>
+                    <div className="text-sm">⭐ {rv.rating}</div>
+                  </div>
+                  <p className="text-sm text-gray-700 mt-1">{rv.comment}</p>
+                </div>
+              )) : <div className="text-sm text-gray-500">No reviews yet</div>}
+            </div>
+          </div>
+          <div className="md:col-span-1">
+            <h3 className="font-semibold mb-2">Write a Review</h3>
+            <form onSubmit={(e) => { e.preventDefault(); const form = e.target as HTMLFormElement; const fd = new FormData(form); const rating = Number(fd.get('rating')); const comment = String(fd.get('comment') || ''); createReview.mutate({ rating, comment }); form.reset(); }} className="space-y-2">
+              <select name="rating" required className="w-full border rounded-md px-3 py-2 dark:bg-gray-800 dark:border-gray-700">
+                <option value="">Rating</option>
+                {[5,4,3,2,1].map(r => <option key={r} value={r}>{r}</option>)}
+              </select>
+              <textarea name="comment" rows={3} placeholder="Share your experience" className="w-full border rounded-md px-3 py-2 dark:bg-gray-800 dark:border-gray-700" />
+              <button type="submit" className="w-full px-3 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700" disabled={createReview.isPending}>Submit</button>
+              <p className="text-xs text-gray-500">Reviews are auto-approved</p>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

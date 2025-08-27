@@ -12,14 +12,13 @@ export default function Restaurants() {
   useEffect(() => { setQuery(params.get('q') || ''); }, [params]);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['restaurants', cuisine],
+    queryKey: ['restaurants', cuisine, query],
     queryFn: async () => {
       const req: any = {};
       if (cuisine) req.cuisine = cuisine;
+      if (query) req.q = query;
       const res = await api.get<Restaurant[]>('/api/restaurants', { params: req });
-      const list = res.data;
-      if (!query) return list;
-      return list.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
+      return res.data;
     },
   });
 

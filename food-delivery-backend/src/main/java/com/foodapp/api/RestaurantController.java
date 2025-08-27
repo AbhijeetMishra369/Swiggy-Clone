@@ -32,10 +32,14 @@ public class RestaurantController {
     public List<Restaurant> list(
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String cuisine,
-            @RequestParam(required = false, defaultValue = "false") boolean top
+            @RequestParam(required = false, defaultValue = "false") boolean top,
+            @RequestParam(required = false, name = "q") String query
     ) {
         if (top) {
             return restaurantService.listTopRated();
+        }
+        if (query != null && !query.isBlank()) {
+            return restaurantService.searchByName(query);
         }
         if (city != null && !city.isBlank()) {
             return restaurantService.listByCity(city);

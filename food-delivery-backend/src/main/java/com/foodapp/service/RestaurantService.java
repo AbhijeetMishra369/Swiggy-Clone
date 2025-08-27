@@ -28,4 +28,8 @@ public class RestaurantService {
     public List<Restaurant> listTopRated() {
         return restaurantRepository.findTopRated();
     }
+
+    public List<Restaurant> searchByName(String q) {
+        return restaurantRepository.searchByName(q);
+    }
 }
