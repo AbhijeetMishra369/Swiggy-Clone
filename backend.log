@@ -1389,3 +1389,4 @@ Hibernate:
     where
         i1_0.cart_id=?
 2025-08-27T07:47:32.891Z  WARN 9031 --- [food-delivery] [nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: Broken pipe]
+2025-08-27T09:35:29.280Z  WARN 9031 --- [food-delivery] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h33m23s321ms507µs574ns).

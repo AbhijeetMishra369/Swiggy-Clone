@@ -26,7 +26,7 @@ export default function Checkout() {
       const res = await api.post('/api/payment/create', { orderId, amount: Math.round(subtotal * 100) });
       const { providerOrderId } = res.data;
       openRazorpay({
-        key: 'rzp_test_xxxxxxxxxx',
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_xxxxxxxxxx',
         amount: Math.round(subtotal * 100),
         currency: 'INR',
         name: 'Foodly',
@@ -48,9 +48,16 @@ export default function Checkout() {
     <div className="max-w-3xl mx-auto px-4">
       <h1 className="text-2xl font-semibold py-6">Checkout</h1>
       {error && <p className="text-red-600">{error}</p>}
-      <div className="border rounded-xl p-4 bg-white">
-        <p className="text-lg">Total payable: ₹ {subtotal.toFixed(2)}</p>
-        <button onClick={handlePay} className="mt-4 px-4 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700">Pay with Razorpay</button>
+      <div className="border rounded-xl p-4 bg-white shadow-sm">
+        <div className="flex items-center justify-between">
+          <p className="text-lg">Total payable</p>
+          <p className="text-2xl font-bold">₹ {subtotal.toFixed(2)}</p>
+        </div>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <button onClick={handlePay} className="px-4 py-3 rounded-lg bg-black text-white hover:opacity-90 transition">Pay with Razorpay</button>
+          <button className="px-4 py-3 rounded-lg border hover:bg-gray-50 transition">Cash on Delivery</button>
+        </div>
+        <p className="text-xs text-gray-500 mt-3">Secured by Razorpay • Test Mode</p>
       </div>
     </div>
   );

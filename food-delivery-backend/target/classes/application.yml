@@ -28,3 +28,7 @@ security:
     secret: Zm9vZC1kZWxpdmVyeS1hcHAtc2VjcmV0LXNwcmluZ2Jvb3Qtc2lnbg==
     expMinutes: 240
 
+razorpay:
+  keyId: ${RAZORPAY_KEY_ID:rzp_test_xxxxxxxxxx}
+  keySecret: ${RAZORPAY_KEY_SECRET:test_secret}
+
