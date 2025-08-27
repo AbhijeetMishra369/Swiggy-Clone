@@ -1,22 +1,19 @@
 package com.foodapp.repository;
 
 import com.foodapp.domain.Restaurant;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+public interface RestaurantRepository extends PagingAndSortingRepository<Restaurant, Long> {
 
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-
-    List<Restaurant> findByCuisineIgnoreCase(String cuisine);
-
-    @Query("select r from Restaurant r where lower(r.address.city) = lower(?1)")
-    List<Restaurant> findByCity(String city);
+    @Query("SELECT r FROM Restaurant r WHERE " +
+            "(:query IS NULL OR LOWER(r.name) LIKE LOWER(CONCAT('%', :query, '%'))) AND " +
+            "(:cuisine IS NULL OR LOWER(r.cuisine) = LOWER(:cuisine))")
+    Page<Restaurant> search(@Param("query") String query, @Param("cuisine") String cuisine, Pageable pageable);
 
     @Query("select r from Restaurant r order by r.averageRating desc")
-    List<Restaurant> findTopRated();
-
-    @Query("select r from Restaurant r where lower(r.name) like lower(concat('%', ?1, '%'))")
-    List<Restaurant> searchByName(String q);
+    Page<Restaurant> findTopRated(Pageable pageable);
 }
-

@@ -33,6 +33,10 @@ public class Restaurant {
 
     private String location;
 
+    private Integer deliveryTime;
+
+    private String priceRange;
+
     @Embedded
     private Address address;
 

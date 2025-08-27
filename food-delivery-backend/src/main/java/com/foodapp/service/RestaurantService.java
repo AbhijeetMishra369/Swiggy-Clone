@@ -3,9 +3,9 @@ package com.foodapp.service;
 import com.foodapp.domain.Restaurant;
 import com.foodapp.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -13,23 +13,11 @@ public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
-    public List<Restaurant> listAll() {
-        return restaurantRepository.findAll();
+    public Page<Restaurant> search(String query, String cuisine, Pageable pageable) {
+        return restaurantRepository.search(query, cuisine, pageable);
     }
 
-    public List<Restaurant> listByCity(String city) {
-        return restaurantRepository.findByCity(city);
-    }
-
-    public List<Restaurant> listByCuisine(String cuisine) {
-        return restaurantRepository.findByCuisineIgnoreCase(cuisine);
-    }
-
-    public List<Restaurant> listTopRated() {
-        return restaurantRepository.findTopRated();
-    }
-
-    public List<Restaurant> searchByName(String q) {
-        return restaurantRepository.searchByName(q);
+    public Page<Restaurant> listTopRated(Pageable pageable) {
+        return restaurantRepository.findTopRated(pageable);
     }
 }

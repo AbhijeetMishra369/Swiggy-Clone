@@ -1,10 +1,12 @@
 export type Address = { line1?: string; city?: string; state?: string; country?: string; postalCode?: string };
 export type Restaurant = {
   id: number;
-  name: string;
+  name:string;
   cuisine: string;
   phone?: string;
   averageRating?: number;
+  deliveryTime?: number;
+  priceRange?: string;
   address?: Address;
   imageUrl?: string;
   location?: string;

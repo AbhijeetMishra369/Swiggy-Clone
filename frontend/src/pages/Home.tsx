@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import RestaurantCard from '../components/RestaurantCard';
 import { CardSkeleton } from '../components/Skeletons';
@@ -18,31 +18,29 @@ export default function Home() {
   const [query, setQuery] = useState('');
   useEffect(() => { setQuery(params.get('q') || ''); }, [params]);
   const [cuisine, setCuisine] = useState('');
-  const [page, setPage] = useState(1);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const { data, isLoading } = useQuery({
+  const {
+    data,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ['restaurants', query, cuisine],
-    queryFn: async () => {
-      const params: any = {};
+    queryFn: async ({ pageParam = 0 }) => {
+      const params: any = { page: pageParam, size: 8 };
       if (cuisine) params.cuisine = cuisine;
-      const res = await api.get<Restaurant[]>('/api/restaurants', { params });
-      const list = res.data;
-      if (!query) return list;
-      return list.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
+      if (query) params.q = query;
+      const res = await api.get('/api/restaurants', { params });
+      return res.data;
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.last) return undefined;
+      return lastPage.pageable.pageNumber + 1;
     },
   });
 
-  useEffect(() => {
-    const el = loadMoreRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) setPage((p) => p + 1);
-      });
-    }, { rootMargin: '200px' });
-    io.observe(el);
-    return () => io.disconnect();
-  }, [loadMoreRef]);
+  const restaurants = useMemo(() => data?.pages.flatMap(page => page.content) ?? [], [data]);
 
   const banners = useMemo(() => ([
     {
@@ -85,17 +83,6 @@ export default function Home() {
                   <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6 }} className="text-white">
                     <h2 className="text-xl md:text-3xl font-extrabold drop-shadow">{b.title}</h2>
                     <p className="mt-1 md:mt-1.5 text-sm md:text-base opacity-90">{b.subtitle}</p>
-                    <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2.5">
-                      <input className="border rounded-md px-3 py-2 text-gray-900" placeholder="Search restaurants" value={query} onChange={e => setQuery(e.target.value)} />
-                      <select className="border rounded-md px-3 py-2 text-gray-900" value={cuisine} onChange={e => setCuisine(e.target.value)}>
-                        <option value="">All cuisines</option>
-                        <option>Indian</option>
-                        <option>Italian</option>
-                        <option>Chinese</option>
-                        <option>Mexican</option>
-                      </select>
-                      <button className="px-4 py-2 rounded-md bg-brand-600 hover:bg-brand-700 transition text-white">Search</button>
-                    </div>
                   </motion.div>
                 </div>
               </div>
@@ -105,12 +92,26 @@ export default function Home() {
       </div>
 
       <div className="container py-6">
+        <div className="mb-6 p-4 rounded-lg bg-gray-50 border">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <input className="border rounded-md px-3 py-2 text-gray-900 w-full" placeholder="Search restaurants..." value={query} onChange={e => setQuery(e.target.value)} />
+            <select className="border rounded-md px-3 py-2 text-gray-900 w-full" value={cuisine} onChange={e => setCuisine(e.target.value)}>
+              <option value="">All Cuisines</option>
+              <option>Indian</option>
+              <option>Italian</option>
+              <option>Chinese</option>
+              <option>Mexican</option>
+            </select>
+            <button className="px-4 py-2 rounded-md bg-brand-600 hover:bg-brand-700 transition text-white w-full">Search</button>
+          </div>
+        </div>
+
         {/* Featured Restaurants (carousel) */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Featured Restaurants</h2>
         </div>
         <Carousel withPagination autoplayMs={3500}>
-          {(isLoading ? Array.from({ length: 8 }) : data)?.map((r: any, i: number) => (
+          {(isLoading ? Array.from({ length: 8 }) : restaurants)?.map((r: any, i: number) => (
             <div key={r?.id ?? i} className="h-full">
               {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
             </div>
@@ -122,13 +123,23 @@ export default function Home() {
           <h2 className="text-xl font-semibold">Top Offers</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-          {(isLoading ? Array.from({ length: 8 }) : data)?.slice(0, page * 8).map((r: any, i: number) => (
-            <motion.div key={r?.id ?? i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              {r ? <RestaurantCard r={r} /> : <CardSkeleton />}
+          {(isLoading && !restaurants.length) ? Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />) : restaurants.map((r: any) => (
+            <motion.div key={r.id} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <RestaurantCard r={r} />
             </motion.div>
           ))}
         </div>
-        <div ref={loadMoreRef} className="h-6" />
+        {hasNextPage && (
+          <div className="mt-6 text-center">
+            <button
+              onClick={() => fetchNextPage()}
+              disabled={isFetchingNextPage}
+              className="px-6 py-2 rounded-md bg-brand-600 text-white hover:bg-brand-700 disabled:bg-gray-400"
+            >
+              {isFetchingNextPage ? 'Loading...' : 'Load More'}
+            </button>
+          </div>
+        )}
 
         {/* Trending Dishes (carousel on mobile) */}
         <div className="mt-10 flex items-center justify-between mb-4">
@@ -171,7 +182,12 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
           {['Pizza','Biryani','Burgers','Desserts','Chinese','South Indian'].map((c) => (
-            <motion.div key={c} whileHover={{ y: -3 }} className="rounded-xl overflow-hidden border bg-white">
+            <motion.div
+              key={c}
+              whileHover={{ y: -3 }}
+              className={`rounded-xl overflow-hidden border bg-white cursor-pointer ${cuisine === c ? 'ring-2 ring-brand-500' : ''}`}
+              onClick={() => setCuisine(c === cuisine ? '' : c)}
+            >
               <div className="h-20 bg-gray-100">
                 <SmartImage src={`https://source.unsplash.com/800x600/?${encodeURIComponent(c)}&sig=1`} alt={c} />
               </div>
