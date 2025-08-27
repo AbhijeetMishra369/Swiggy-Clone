@@ -8,13 +8,11 @@ import com.foodapp.repository.RestaurantRepository;
 import com.foodapp.repository.ReviewRepository;
 import com.foodapp.repository.AppUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,25 +27,16 @@ public class RestaurantController {
     private final AppUserRepository appUserRepository;
 
     @GetMapping
-    public List<Restaurant> list(
-            @RequestParam(required = false) String city,
+    public Page<Restaurant> list(
             @RequestParam(required = false) String cuisine,
             @RequestParam(required = false, defaultValue = "false") boolean top,
-            @RequestParam(required = false, name = "q") String query
+            @RequestParam(required = false, name = "q") String query,
+            Pageable pageable
     ) {
         if (top) {
-            return restaurantService.listTopRated();
+            return restaurantService.listTopRated(pageable);
         }
-        if (query != null && !query.isBlank()) {
-            return restaurantService.searchByName(query);
-        }
-        if (city != null && !city.isBlank()) {
-            return restaurantService.listByCity(city);
-        }
-        if (cuisine != null && !cuisine.isBlank()) {
-            return restaurantService.listByCuisine(cuisine);
-        }
-        return restaurantService.listAll();
+        return restaurantService.search(query, cuisine, pageable);
     }
 
     @GetMapping("/{id}/reviews")
