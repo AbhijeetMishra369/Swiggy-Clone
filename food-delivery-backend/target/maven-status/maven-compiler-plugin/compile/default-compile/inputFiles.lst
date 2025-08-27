@@ -21,12 +21,16 @@
 /workspace/food-delivery-backend/src/main/java/com/foodapp/domain/Restaurant.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/domain/Review.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/domain/Role.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/dto/AddToCartRequest.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/dto/AuthDtos.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/dto/CartDtos.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/dto/LoginRequest.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/dto/OrderDtos.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/dto/PlaceOrderRequest.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/dto/RegisterRequest.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/dto/RemoveFromCartRequest.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/repository/AppUserRepository.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/repository/CartRepository.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/repository/CouponRepository.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/repository/MenuItemRepository.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/repository/OrderRepository.java
