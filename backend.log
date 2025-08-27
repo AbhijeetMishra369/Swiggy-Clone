@@ -1251,3 +1251,141 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer fou
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
 
 2025-08-27T07:43:31.361Z  WARN 9031 --- [food-delivery] [nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "null"]
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.country,
+        r1_0.latitude,
+        r1_0.line1,
+        r1_0.line2,
+        r1_0.longitude,
+        r1_0.postal_code,
+        r1_0.state,
+        r1_0.average_rating,
+        r1_0.cuisine,
+        r1_0.image_url,
+        r1_0.location,
+        r1_0.name,
+        r1_0.phone 
+    from
+        restaurants r1_0
+Hibernate: 
+    select
+        mi1_0.restaurant_id,
+        mi1_0.id,
+        mi1_0.available,
+        mi1_0.category,
+        mi1_0.description,
+        mi1_0.image_url,
+        mi1_0.name,
+        mi1_0.price 
+    from
+        menu_items mi1_0 
+    where
+        mi1_0.restaurant_id=?
+Hibernate: 
+    select
+        mi1_0.restaurant_id,
+        mi1_0.id,
+        mi1_0.available,
+        mi1_0.category,
+        mi1_0.description,
+        mi1_0.image_url,
+        mi1_0.name,
+        mi1_0.price 
+    from
+        menu_items mi1_0 
+    where
+        mi1_0.restaurant_id=?
+Hibernate: 
+    select
+        mi1_0.id,
+        mi1_0.available,
+        mi1_0.category,
+        mi1_0.description,
+        mi1_0.image_url,
+        mi1_0.name,
+        mi1_0.price,
+        mi1_0.restaurant_id 
+    from
+        menu_items mi1_0 
+    where
+        mi1_0.restaurant_id=?
+Hibernate: 
+    select
+        au1_0.id 
+    from
+        users au1_0 
+    where
+        au1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (address, blocked, email, name, password, phone, role, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        au1_0.id,
+        au1_0.address,
+        au1_0.blocked,
+        au1_0.email,
+        au1_0.name,
+        au1_0.password,
+        au1_0.phone,
+        au1_0.role 
+    from
+        users au1_0 
+    where
+        au1_0.email=?
+Hibernate: 
+    select
+        au1_0.id,
+        au1_0.address,
+        au1_0.blocked,
+        au1_0.email,
+        au1_0.name,
+        au1_0.password,
+        au1_0.phone,
+        au1_0.role 
+    from
+        users au1_0 
+    where
+        au1_0.email=?
+Hibernate: 
+    select
+        au1_0.id,
+        au1_0.address,
+        au1_0.blocked,
+        au1_0.email,
+        au1_0.name,
+        au1_0.password,
+        au1_0.phone,
+        au1_0.role 
+    from
+        users au1_0 
+    where
+        au1_0.email=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.user_id 
+    from
+        carts c1_0 
+    where
+        c1_0.user_id=?
+Hibernate: 
+    select
+        i1_0.cart_id,
+        i1_0.id,
+        i1_0.menu_item_id,
+        i1_0.quantity 
+    from
+        cart_items i1_0 
+    where
+        i1_0.cart_id=?
+2025-08-27T07:47:32.891Z  WARN 9031 --- [food-delivery] [nio-8081-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: Broken pipe]
