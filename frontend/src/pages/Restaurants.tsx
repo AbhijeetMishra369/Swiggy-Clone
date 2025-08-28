@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api';
-import type { Restaurant } from '../types';
 import RestaurantCard from '../components/RestaurantCard';
 import { CardSkeleton } from '../components/Skeletons';
 
-function FiltersBar({ fastOnly, setFastOnly }: { fastOnly: boolean; setFastOnly: (v: boolean | ((v: boolean) => boolean)) => void }) {
+function FiltersBar({ setFastOnly }: { setFastOnly: (v: boolean | ((v: boolean) => boolean)) => void }) {
   const filters = ['Offers', 'Fast Delivery', 'Rating 4.0+', 'Pure Veg', 'New on Swiggy'];
   return (
     <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
@@ -33,8 +32,8 @@ export default function Restaurants() {
       const req: any = {};
       if (cuisine) req.cuisine = cuisine;
       if (query) req.q = query;
-      const res = await api.get<Restaurant[]>('/api/restaurants', { params: req });
-      let list = res.data;
+      const res = await api.get('/api/restaurants', { params: req });
+      let list = res.data as any[];
       if (sort === 'rating') list = list.sort((a: any, b: any) => (b.averageRating ?? 0) - (a.averageRating ?? 0));
       if (sort === 'name') list = list.sort((a: any, b: any) => a.name.localeCompare(b.name));
       // fastOnly is a UI-only filter; using name heuristic for demo
@@ -63,7 +62,7 @@ export default function Restaurants() {
           <button onClick={() => setFastOnly(v => !v)} className={`px-3 py-2 rounded-full border ${fastOnly ? 'bg-brand-600 text-white border-brand-600' : ''}`}>Fast Delivery</button>
         </div>
       </div>
-      <FiltersBar fastOnly={fastOnly} setFastOnly={setFastOnly} />
+      <FiltersBar setFastOnly={setFastOnly} />
       {error && <div className="rounded-md bg-red-50 text-red-700 text-sm px-3 py-2 border border-red-100">Failed to load restaurants</div>}
       {!isLoading && !error && (!data || data.length === 0) && (
         <div className="mt-6 rounded-xl border bg-white p-6 text-center text-sm text-gray-600">
