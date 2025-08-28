@@ -1411,3 +1411,1278 @@ Hibernate:
         o1_0.user_id 
     from
         orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+2025-08-28T12:05:39.307Z  WARN 3574 --- [food-delivery] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4h34m4s680ms384µs546ns).
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        o1_0.id,
+        o1_0.created_at,
+        o1_0.discount,
+        o1_0.payment_status,
+        o1_0.restaurant_id,
+        o1_0.status,
+        o1_0.subtotal,
+        o1_0.total,
+        o1_0.user_id 
+    from
+        orders o1_0
