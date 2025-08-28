@@ -76,7 +76,19 @@ public class AdminController {
 
     // /admin/orders
     @GetMapping("/orders")
-    public Object listOrders() { return orderRepository.findAll(); }
+    public Object listOrders() {
+        // Avoid lazy-proxy serialization issues by trimming deep associations
+        var orders = orderRepository.findAll();
+        orders.forEach(o -> {
+            if (o.getRestaurant() != null) {
+                // Drop menu items collection from nested restaurant to avoid recursion
+                if (o.getRestaurant().getMenuItems() != null) {
+                    o.getRestaurant().setMenuItems(java.util.List.of());
+                }
+            }
+        });
+        return orders;
+    }
     @PutMapping("/orders/{id}/status")
     @Transactional
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long id, @RequestBody java.util.Map<String,String> body) {

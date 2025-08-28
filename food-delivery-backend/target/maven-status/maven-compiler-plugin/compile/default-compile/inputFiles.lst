@@ -43,5 +43,7 @@
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/AuthService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/CartService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/MenuService.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/service/OrderEventService.java
+/workspace/food-delivery-backend/src/main/java/com/foodapp/service/OrderProgressor.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/OrderService.java
 /workspace/food-delivery-backend/src/main/java/com/foodapp/service/RestaurantService.java

@@ -2,6 +2,7 @@ package com.foodapp.domain;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class MenuItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
     @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Restaurant restaurant;
 
     @Column(nullable = false)

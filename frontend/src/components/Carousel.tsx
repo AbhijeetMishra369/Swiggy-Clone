@@ -1,13 +1,12 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, FreeMode } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 type CarouselProps = {
   children: ReactNode[];
-  slidesPerView?: number | { [key: string]: number };
+  slidesPerView?: number | Record<number, number>;
   spaceBetween?: number;
   autoplayMs?: number | false;
   freeMode?: boolean;
@@ -27,11 +26,14 @@ export default function Carousel({
   className = '',
 }: CarouselProps) {
   const modules = [Navigation, Pagination, Autoplay, FreeMode];
+  const computedBreakpoints = typeof slidesPerView === 'number' ? undefined : Object.fromEntries(
+    Object.entries(slidesPerView as Record<number, number>).map(([k, v]) => [Number(k), { slidesPerView: v }])
+  );
   return (
     <Swiper
       modules={modules}
       slidesPerView={typeof slidesPerView === 'number' ? slidesPerView : undefined}
-      breakpoints={typeof slidesPerView === 'number' ? undefined : slidesPerView}
+      breakpoints={computedBreakpoints as any}
       spaceBetween={spaceBetween}
       autoplay={autoplayMs ? { delay: autoplayMs, disableOnInteraction: false } : false}
       freeMode={freeMode}

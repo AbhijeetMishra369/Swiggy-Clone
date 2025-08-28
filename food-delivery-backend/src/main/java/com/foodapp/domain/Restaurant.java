@@ -2,6 +2,7 @@ package com.foodapp.domain;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

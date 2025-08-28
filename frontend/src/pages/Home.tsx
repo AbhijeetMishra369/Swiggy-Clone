@@ -1,9 +1,8 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { api } from '../lib/api';
 import RestaurantCard from '../components/RestaurantCard';
 import { CardSkeleton } from '../components/Skeletons';
-import type { Restaurant } from '../types';
 import { useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
