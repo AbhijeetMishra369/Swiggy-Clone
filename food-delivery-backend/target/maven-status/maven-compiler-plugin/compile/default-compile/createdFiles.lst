@@ -40,6 +40,7 @@ com/foodapp/service/CartService.class
 com/foodapp/bootstrap/DataLoader.class
 com/foodapp/security/JwtUtil.class
 com/foodapp/domain/CartItem.class
+com/foodapp/service/OrderEventService.class
 com/foodapp/domain/Restaurant$RestaurantBuilder.class
 com/foodapp/repository/ReviewRepository.class
 com/foodapp/domain/MenuItem$MenuItemBuilder.class
@@ -51,5 +52,6 @@ com/foodapp/repository/OrderRepository.class
 com/foodapp/domain/OrderItem.class
 com/foodapp/domain/CartItem$CartItemBuilder.class
 com/foodapp/service/AuthService.class
+com/foodapp/service/OrderProgressor.class
 com/foodapp/api/HealthController.class
 com/foodapp/domain/Payment$PaymentBuilder.class
